@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Đề luyện thi vào 10 Công lập - Tenses & Passive Voice</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body {font-family: 'Quicksand', sans-serif; background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%); font-size: 1.5rem;}
+  .question-box {background: #f8f9fa; padding: 20px; border-radius: 20px; margin-bottom: 20px; border-left: 4px solid #4CAF50;}
+  .option-btn {padding: 12px 24px; margin: 8px; border: 2px solid #ddd; border-radius: 20px; background: white;
+               cursor: pointer; transition: all 0.3s; font-size: 20px; min-width: 120px;
+               font-variant-ligatures: none !important;
+               font-feature-settings: "liga" 0 !important;}
+  .option-btn:hover {border-color: #4CAF50; background: #f0fff0;}
+  .option-btn.selected {border-color: #4CAF50; background: #4CAF50; color: white; font-weight: bold;}
+  .section-title {color: #FF6B6B; font-size: 2rem; font-weight: bold; margin: 30px 0 15px 0; padding-bottom: 10px; border-bottom: 3px solid #FF6B6B;}
+  .font-bold { font-size: 1.5rem; }
+  .option-btn.correct-ans {border-color: #4CAF50; background: #4CAF50; color: white; font-weight: bold; cursor: default;}
+  .option-btn.wrong-ans {border-color: #f44336; background: #f44336; color: white; font-weight: bold; cursor: default;}
+  .explanation-box {background: #FFF9C4; border-left: 5px solid #FBC02D; padding: 16px 20px; border-radius: 12px; margin-top: 14px; font-size: 1.15rem; line-height: 1.6; color: #3a3a3a;}
+  .explanation-box .exp-status { font-size: 1.2rem; }
+  .review-legend {background: white; border-radius: 16px; padding: 16px 24px; margin-bottom: 16px; font-size: 1.2rem; display: flex; gap: 24px; align-items: center; flex-wrap: wrap;}
+  .legend-dot {display:inline-block; width:22px; height:22px; border-radius:6px; vertical-align:middle; margin-right:6px;}
+</style>
+</head>
+<body>
+
+<!-- Màn hình nhập mã -->
+<div id="codeScreen" class="min-h-screen flex items-center justify-center p-6">
+  <div class="max-w-2xl w-full bg-white rounded-2xl shadow-2xl p-12 text-center">
+    <h1 class="text-5xl font-bold text-green-700 mb-4">LUYỆN THI VÀO 10 CÔNG LẬP</h1>
+    <h2 class="text-3xl font-bold text-orange-600 mb-8">Tenses & Passive Voice Công lập - Practice Test</h2>
+    <input type="text" id="studentCode" class="w-full px-6 py-5 text-3xl border-4 border-green-400 rounded-xl uppercase text-center mb-8" placeholder="Nhập mã học sinh">
+    <button onclick="verifyStudent()" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-6 rounded-xl text-3xl shadow-2xl">BẮT ĐẦU</button>
+  </div>
+</div>
+
+<!-- Màn hình làm bài -->
+<div id="testScreen" class="hidden min-h-screen p-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="bg-white rounded-2xl shadow-2xl p-6 sticky top-0 z-10 mb-6">
+      <div class="flex justify-between items-center">
+        <h1 class="text-3xl font-bold text-green-700">Tenses & Passive Voice Công lập - Practice Test</h1>
+        <div class="text-right">
+          <p class="text-xl">Học sinh: <span id="headerName" class="font-bold"></span></p>
+          <p class="text-3xl font-bold text-red-600">⏱ <span id="timer">00:00</span></p>
+        </div>
+      </div>
+      <div class="mt-4 bg-gray-300 rounded-full h-6">
+        <div id="progress" class="bg-green-600 h-full transition-all" style="width:0%"></div>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow-2xl p-12">
+
+      <!-- Q1-2 -->
+      <div class="section-title">Questions 1–2. Choose the correct answer to complete the text.</div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">1. Choose the correct sentence to complete the first half of the following text.<br><br>
+        Last year, Mai found it difficult to keep up with her English class. She often felt confused during lessons and fell behind her classmates. ______</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(1, 'A')">A. As a result, she decided to give up learning English completely.</button>
+          <button class="option-btn" onclick="selectAnswer(1, 'B')">B. So, she started asking her teacher questions after class and reviewing her notes every evening.</button>
+          <button class="option-btn" onclick="selectAnswer(1, 'C')">C. Because of this, her school removed English from her timetable.</button>
+          <button class="option-btn" onclick="selectAnswer(1, 'D')">D. However, she refused to speak to her teacher about the problem.</button>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">2. Reorder the following sentences to complete the second half of the text in a logical way.<br><br>
+        a. As a result, her test scores gradually improved over the following months.<br>
+        b. With her teacher's advice, she also started a fixed study routine at home.<br>
+        c. At first, this made her feel more confident about asking questions in class.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(2, 'A')">A. c - b - a</button>
+          <button class="option-btn" onclick="selectAnswer(2, 'B')">B. b - c - a</button>
+          <button class="option-btn" onclick="selectAnswer(2, 'C')">C. a - c - b</button>
+          <button class="option-btn" onclick="selectAnswer(2, 'D')">D. c - a - b</button>
+        </div>
+      </div>
+
+      <!-- Q3-8 -->
+      <div class="section-title">Questions 3–8. Read the passage and choose the correct answer.</div>
+
+      <div class="bg-blue-50 p-6 rounded-xl mb-4 text-xl">
+        <p class="font-bold text-center text-2xl mb-3">CHOOSING THE RIGHT PATH AFTER SCHOOL</p>
+        <p class="text-gray-800 leading-relaxed">
+          For many students finishing secondary school, choosing between an academic path and a vocational path is not always easy. Some students discover their strengths early, while others need more time.<br><br>
+          Extracurricular clubs can help with this. When students join a coding club or a debate team, they often find out what they are naturally good at. This kind of discovery is valuable. It helps students avoid a path that seems safe or <strong><u>conventional</u></strong>, but does not truly suit them.<br><br>
+          Teachers say that curious students who try new activities tend to feel more confident about their decisions later. <strong><u>This</u></strong> willingness to explore helps them build a clearer picture of their own strengths and weaknesses.<br><br>
+          Not every student needs the same path. Some succeed through university study, while others do well by taking up vocational courses instead. What matters most is that students stay <strong><u>committed</u></strong> and remain curious about new opportunities.
+        </p>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">3. The word "conventional" in paragraph 2 is CLOSEST in meaning to ______.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(3, 'A')">A. unusual</button>
+          <button class="option-btn" onclick="selectAnswer(3, 'B')">B. traditional</button>
+          <button class="option-btn" onclick="selectAnswer(3, 'C')">C. modern</button>
+          <button class="option-btn" onclick="selectAnswer(3, 'D')">D. creative</button>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">4. The word "This" in paragraph 3 refers to ______.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(4, 'A')">A. being a curious student</button>
+          <button class="option-btn" onclick="selectAnswer(4, 'B')">B. trying new activities</button>
+          <button class="option-btn" onclick="selectAnswer(4, 'C')">C. feeling confident</button>
+          <button class="option-btn" onclick="selectAnswer(4, 'D')">D. making decisions</button>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">5. Which of the following is TRUE according to the passage?</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(5, 'A')">A. Every student must choose a vocational path instead of university.</button>
+          <button class="option-btn" onclick="selectAnswer(5, 'B')">B. Extracurricular clubs can help students discover strengths they did not know they had.</button>
+          <button class="option-btn" onclick="selectAnswer(5, 'C')">C. Curious students always regret trying new activities.</button>
+          <button class="option-btn" onclick="selectAnswer(5, 'D')">D. Only academic subjects can help students understand their own abilities.</button>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">6. According to the passage, what can extracurricular clubs help students do?</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(6, 'A')">A. Avoid all academic subjects completely.</button>
+          <button class="option-btn" onclick="selectAnswer(6, 'B')">B. Find out what they are naturally good at.</button>
+          <button class="option-btn" onclick="selectAnswer(6, 'C')">C. Skip vocational training entirely.</button>
+          <button class="option-btn" onclick="selectAnswer(6, 'D')">D. Choose a career without any effort.</button>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">7. What is the main idea of the passage?</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(7, 'A')">A. University is always a better choice than vocational training.</button>
+          <button class="option-btn" onclick="selectAnswer(7, 'B')">B. Trying new activities can help students understand their strengths and choose the right path.</button>
+          <button class="option-btn" onclick="selectAnswer(7, 'C')">C. Students should avoid clubs and focus only on academic subjects.</button>
+          <button class="option-btn" onclick="selectAnswer(7, 'D')">D. Teachers should choose a career path for every student.</button>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">8. The word "committed" in paragraph 4 is OPPOSITE in meaning to ______.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(8, 'A')">A. dedicated</button>
+          <button class="option-btn" onclick="selectAnswer(8, 'B')">B. careless</button>
+          <button class="option-btn" onclick="selectAnswer(8, 'C')">C. curious</button>
+          <button class="option-btn" onclick="selectAnswer(8, 'D')">D. confident</button>
+        </div>
+      </div>
+
+      <!-- Q9-14 -->
+      <div class="section-title">Questions 9–14. Choose the correct option that best fits each blank.</div>
+
+      <div class="bg-blue-50 p-6 rounded-xl mb-4 text-xl">
+        <p class="font-bold text-center text-2xl mb-3">TURNING WEAKNESSES INTO STRENGTHS</p>
+        <p class="text-gray-800 leading-relaxed">
+          Every student has both strengths and weaknesses, but not everyone knows how to deal with a weak subject effectively. Instead of feeling discouraged, students should (9)______ small, realistic steps to improve gradually.<br><br>
+          One useful method is to divide a difficult subject into smaller topics and review them regularly, rather than trying to catch up on everything in one evening. This approach (10)______ to reduce stress and helps students stay motivated over time.<br><br>
+          An experienced teacher usually helps students follow a study plan (11)______ around their own strengths and weaknesses.<br><br>
+          It's also important not to give up when progress feels slow. Many students (12)______ behind at first, but with determination and support from tutors, they can catch up.<br><br>
+          By the end of the term, students who have (13)______ consistently often reach a real breakthrough in the subject they once struggled with.<br><br>
+          In short, a weakness (14)______ into a strength when students combine patience, a clear plan, and steady effort.
+        </p>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">9.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(9, 'A')">A. set</button>
+          <button class="option-btn" onclick="selectAnswer(9, 'B')">B. sets</button>
+          <button class="option-btn" onclick="selectAnswer(9, 'C')">C. setting</button>
+          <button class="option-btn" onclick="selectAnswer(9, 'D')">D. to setting</button>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">10.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(10, 'A')">A. is believed</button>
+          <button class="option-btn" onclick="selectAnswer(10, 'B')">B. believes</button>
+          <button class="option-btn" onclick="selectAnswer(10, 'C')">C. was believed</button>
+          <button class="option-btn" onclick="selectAnswer(10, 'D')">D. believe</button>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">11.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(11, 'A')">A. designs</button>
+          <button class="option-btn" onclick="selectAnswer(11, 'B')">B. designed</button>
+          <button class="option-btn" onclick="selectAnswer(11, 'C')">C. is designed</button>
+          <button class="option-btn" onclick="selectAnswer(11, 'D')">D. was designed</button>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">12.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(12, 'A')">A. fall</button>
+          <button class="option-btn" onclick="selectAnswer(12, 'B')">B. fell</button>
+          <button class="option-btn" onclick="selectAnswer(12, 'C')">C. falls</button>
+          <button class="option-btn" onclick="selectAnswer(12, 'D')">D. have fallen</button>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">13.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(13, 'A')">A. work</button>
+          <button class="option-btn" onclick="selectAnswer(13, 'B')">B. worked</button>
+          <button class="option-btn" onclick="selectAnswer(13, 'C')">C. have worked</button>
+          <button class="option-btn" onclick="selectAnswer(13, 'D')">D. working</button>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">14.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(14, 'A')">A. turn</button>
+          <button class="option-btn" onclick="selectAnswer(14, 'B')">B. turns</button>
+          <button class="option-btn" onclick="selectAnswer(14, 'C')">C. is turned</button>
+          <button class="option-btn" onclick="selectAnswer(14, 'D')">D. turned</button>
+        </div>
+      </div>
+
+      <!-- Q15-16 -->
+      <div class="section-title">Questions 15–16. Read the notice/message and choose the correct answer.</div>
+
+      <div class="bg-blue-50 p-6 rounded-xl mb-4 text-xl">
+        <p class="font-bold text-center text-2xl mb-3">ONLINE TEST SUBMISSION</p>
+        <p class="text-gray-800 text-center leading-relaxed">
+          Once you click "Submit," your answers cannot be changed.<br>
+          Please check your work carefully before submitting.
+        </p>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">15. What does the notice mean?</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(15, 'A')">A. Students can edit their answers after submitting if they find a mistake.</button>
+          <button class="option-btn" onclick="selectAnswer(15, 'B')">B. Students should review their answers carefully because changes won't be possible afterward.</button>
+          <button class="option-btn" onclick="selectAnswer(15, 'C')">C. The test will automatically submit itself after a certain time.</button>
+          <button class="option-btn" onclick="selectAnswer(15, 'D')">D. Students are not allowed to submit their test more than once.</button>
+        </div>
+      </div>
+
+      <div class="bg-blue-50 p-6 rounded-xl mb-4 text-xl">
+        <p class="font-bold text-center text-2xl mb-3">REMINDER</p>
+        <p class="text-gray-800 text-center leading-relaxed">
+          All students who signed up for the workshop must arrive 10 minutes early.<br>
+          Latecomers may not be allowed to join the session.
+        </p>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">16. What does the message imply?</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(16, 'A')">A. Students who arrive exactly on time may still be refused entry.</button>
+          <button class="option-btn" onclick="selectAnswer(16, 'B')">B. The workshop start time has been moved 10 minutes earlier.</button>
+          <button class="option-btn" onclick="selectAnswer(16, 'C')">C. Students should not sign up for the workshop if they might be late.</button>
+          <button class="option-btn" onclick="selectAnswer(16, 'D')">D. Only students who signed up in advance need to arrive early.</button>
+        </div>
+      </div>
+
+      <!-- Q17-20 -->
+      <div class="section-title">Questions 17–20. Choose the correct option that best fits each blank.</div>
+
+      <div class="bg-blue-50 p-6 rounded-xl mb-4 text-xl">
+        <p class="font-bold text-center text-2xl mb-3">EXAM DAY REMINDERS</p>
+        <p class="text-gray-800 leading-relaxed">
+          On the day of the exam, students should arrive at the exam center at least 30 minutes (17)______ the starting time. Remember to (18)______ your student ID card and two pens with you. If you feel unwell during the test, raise your hand and (19)______ the supervisor immediately. Try to stay calm and (20)______ your best on every question.
+        </p>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">17.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(17, 'A')">A. before</button>
+          <button class="option-btn" onclick="selectAnswer(17, 'B')">B. after</button>
+          <button class="option-btn" onclick="selectAnswer(17, 'C')">C. since</button>
+          <button class="option-btn" onclick="selectAnswer(17, 'D')">D. until</button>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">18.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(18, 'A')">A. take</button>
+          <button class="option-btn" onclick="selectAnswer(18, 'B')">B. bring</button>
+          <button class="option-btn" onclick="selectAnswer(18, 'C')">C. hold</button>
+          <button class="option-btn" onclick="selectAnswer(18, 'D')">D. keep</button>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">19.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(19, 'A')">A. inform</button>
+          <button class="option-btn" onclick="selectAnswer(19, 'B')">B. turn</button>
+          <button class="option-btn" onclick="selectAnswer(19, 'C')">C. remind</button>
+          <button class="option-btn" onclick="selectAnswer(19, 'D')">D. review</button>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">20.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(20, 'A')">A. do</button>
+          <button class="option-btn" onclick="selectAnswer(20, 'B')">B. make</button>
+          <button class="option-btn" onclick="selectAnswer(20, 'C')">C. take</button>
+          <button class="option-btn" onclick="selectAnswer(20, 'D')">D. give</button>
+        </div>
+      </div>
+
+      <!-- Q21-28 -->
+      <div class="section-title">Questions 21–28. Choose the correct answer.</div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">21. Without regular review, students may find it difficult to ______ new vocabulary.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(21, 'A')">A. comprehend</button>
+          <button class="option-btn" onclick="selectAnswer(21, 'B')">B. memorize</button>
+          <button class="option-btn" onclick="selectAnswer(21, 'C')">C. concentrate</button>
+          <button class="option-btn" onclick="selectAnswer(21, 'D')">D. motivate</button>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">22. She felt very ______ about her chances of passing the exam after months of hard work.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(22, 'A')">A. confident</button>
+          <button class="option-btn" onclick="selectAnswer(22, 'B')">B. curious</button>
+          <button class="option-btn" onclick="selectAnswer(22, 'C')">C. responsible</button>
+          <button class="option-btn" onclick="selectAnswer(22, 'D')">D. independent</button>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">23. Some teachers unfairly ______ students for problems that were not really their fault.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(23, 'A')">A. praise</button>
+          <button class="option-btn" onclick="selectAnswer(23, 'B')">B. blame</button>
+          <button class="option-btn" onclick="selectAnswer(23, 'C')">C. credit</button>
+          <button class="option-btn" onclick="selectAnswer(23, 'D')">D. congratulate</button>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">24. - Teacher: "Your essay shows great improvement this term."<br>- Student: "______"</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(24, 'A')">A. That's very kind of you to say, thank you!</button>
+          <button class="option-btn" onclick="selectAnswer(24, 'B')">B. You're welcome.</button>
+          <button class="option-btn" onclick="selectAnswer(24, 'C')">C. No worries at all!</button>
+          <button class="option-btn" onclick="selectAnswer(24, 'D')">D. I couldn't agree more.</button>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">25. His grandfather encouraged him to ______ a new hobby to relax after his exams.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(25, 'A')">A. take up</button>
+          <button class="option-btn" onclick="selectAnswer(25, 'B')">B. carry out</button>
+          <button class="option-btn" onclick="selectAnswer(25, 'C')">C. turn into</button>
+          <button class="option-btn" onclick="selectAnswer(25, 'D')">D. figure out</button>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">26. ______ new information without understanding it properly rarely helps students in the long run.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(26, 'A')">A. Memorize</button>
+          <button class="option-btn" onclick="selectAnswer(26, 'B')">B. Memorizing</button>
+          <button class="option-btn" onclick="selectAnswer(26, 'C')">C. To memorizing</button>
+          <button class="option-btn" onclick="selectAnswer(26, 'D')">D. Memorized</button>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">27. If you struggle with a new topic, ______ your teacher for extra help instead of giving up.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(27, 'A')">A. asking</button>
+          <button class="option-btn" onclick="selectAnswer(27, 'B')">B. ask</button>
+          <button class="option-btn" onclick="selectAnswer(27, 'C')">C. asked</button>
+          <button class="option-btn" onclick="selectAnswer(27, 'D')">D. will ask</button>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">28. While she was preparing for her final exam last month, she ______ a scholarship opportunity that changed her plans.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(28, 'A')">A. was discovering</button>
+          <button class="option-btn" onclick="selectAnswer(28, 'B')">B. discovers</button>
+          <button class="option-btn" onclick="selectAnswer(28, 'C')">C. discovered</button>
+          <button class="option-btn" onclick="selectAnswer(28, 'D')">D. has discovered</button>
+        </div>
+      </div>
+
+      <!-- Q29-30 -->
+      <div class="section-title">Questions 29–30. Choose the word whose underlined part differs from the other three in pronunciation.</div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">29.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(29, 'A')">A. a<u>ch</u>ievement</button>
+          <button class="option-btn" onclick="selectAnswer(29, 'B')">B. <u>ch</u>allenging</button>
+          <button class="option-btn" onclick="selectAnswer(29, 'C')">C. tea<u>ch</u>er</button>
+          <button class="option-btn" onclick="selectAnswer(29, 'D')">D. s<u>ch</u>olar</button>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">30.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(30, 'A')">A. w<u>ea</u>kness</button>
+          <button class="option-btn" onclick="selectAnswer(30, 'B')">B. br<u>ea</u>k</button>
+          <button class="option-btn" onclick="selectAnswer(30, 'C')">C. r<u>ea</u>lly</button>
+          <button class="option-btn" onclick="selectAnswer(30, 'D')">D. t<u>ea</u>cher</button>
+        </div>
+      </div>
+
+      <!-- Q31-32 -->
+      <div class="section-title">Questions 31–32. Choose the sentence that is best made from the given cues.</div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">31. the tutor / already / explain / this grammar point / twice / before / the test.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(31, 'A')">A. The tutor already explained this grammar point twice before the test.</button>
+          <button class="option-btn" onclick="selectAnswer(31, 'B')">B. The tutor has already explained this grammar point twice before the test.</button>
+          <button class="option-btn" onclick="selectAnswer(31, 'C')">C. The tutor was already explaining this grammar point twice before the test.</button>
+          <button class="option-btn" onclick="selectAnswer(31, 'D')">D. The tutor already has explain this grammar point twice before the test.</button>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">32. this report / must / finish / before / the deadline / by the team.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(32, 'A')">A. This report must finish by the team before the deadline.</button>
+          <button class="option-btn" onclick="selectAnswer(32, 'B')">B. This report must be finished before the deadline by the team.</button>
+          <button class="option-btn" onclick="selectAnswer(32, 'C')">C. This report must being finished by the team before the deadline.</button>
+          <button class="option-btn" onclick="selectAnswer(32, 'D')">D. This report must be finished by the team before the deadline.</button>
+        </div>
+      </div>
+
+      <!-- Q33-34 -->
+      <div class="section-title">Questions 33–34. Choose the sentence that is closest in meaning to the original sentence.</div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">33. "You should keep a consistent study routine if you want to make real progress," the tutor told Lan.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(33, 'A')">A. The tutor advised Lan to keep a consistent study routine to make real progress.</button>
+          <button class="option-btn" onclick="selectAnswer(33, 'B')">B. The tutor asked Lan whether she kept a consistent study routine.</button>
+          <button class="option-btn" onclick="selectAnswer(33, 'C')">C. The tutor warned Lan not to keep a consistent study routine.</button>
+          <button class="option-btn" onclick="selectAnswer(33, 'D')">D. The tutor wondered if Lan would keep a consistent study routine.</button>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">34. Reviewing lessons every day usually helps students remember information better than cramming right before exams.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(34, 'A')">A. Cramming right before exams helps students remember information better than daily review.</button>
+          <button class="option-btn" onclick="selectAnswer(34, 'B')">B. Daily review is generally more effective for remembering information than last-minute cramming.</button>
+          <button class="option-btn" onclick="selectAnswer(34, 'C')">C. Cramming and daily review are equally effective for remembering information.</button>
+          <button class="option-btn" onclick="selectAnswer(34, 'D')">D. Neither daily review nor cramming helps students remember information.</button>
+        </div>
+      </div>
+
+      <!-- Q35-36 -->
+      <div class="section-title">Questions 35–36. Choose the word that differs from the other three in the position of primary stress.</div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">35.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(35, 'A')">A. determine</button>
+          <button class="option-btn" onclick="selectAnswer(35, 'B')">B. curious</button>
+          <button class="option-btn" onclick="selectAnswer(35, 'C')">C. achievement</button>
+          <button class="option-btn" onclick="selectAnswer(35, 'D')">D. potential</button>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">36.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(36, 'A')">A. confident</button>
+          <button class="option-btn" onclick="selectAnswer(36, 'B')">B. effective</button>
+          <button class="option-btn" onclick="selectAnswer(36, 'C')">C. essential</button>
+          <button class="option-btn" onclick="selectAnswer(36, 'D')">D. demanding</button>
+        </div>
+      </div>
+
+      <!-- Q37-40 -->
+      <div class="section-title">Questions 37–40. Four phrases/sentences have been removed from the text. Choose the correct option for each blank.</div>
+
+      <div class="bg-blue-50 p-6 rounded-xl mb-4 text-xl">
+        <p class="font-bold text-center text-2xl mb-3">STUDYING ALONE OR WITH FRIENDS?</p>
+        <p class="text-gray-800 leading-relaxed">
+          Some students prefer studying alone at home, while others join study groups with classmates. Both methods have their own benefits. Studying alone allows students to work at their own pace and avoid distractions. (37)______.<br><br>
+          On the other hand, study groups give students the chance to explain ideas to each other. In the past, many students who struggled with a subject simply gave up because they had no one to ask for help. (38)______.<br><br>
+          Choosing between the two methods often depends on personal habits. A student who concentrates well alone may not need a group, while a student who loses motivation easily might benefit more from company. (39)______.<br><br>
+          In the end, there is no single correct choice for every student. (40)______, and both can lead to good results when used in the right way.
+        </p>
+        <p class="text-gray-700 mt-4">
+          A. Today, however, many schools organise peer-tutoring programmes so that stronger students can support classmates<br>
+          B. This makes it easier to focus deeply on difficult topics without interruption<br>
+          C. For this reason, some students even switch between the two methods depending on the subject<br>
+          D. What matters most is finding the method that suits each student's own personality
+        </p>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">37.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(37, 'A')">A</button>
+          <button class="option-btn" onclick="selectAnswer(37, 'B')">B</button>
+          <button class="option-btn" onclick="selectAnswer(37, 'C')">C</button>
+          <button class="option-btn" onclick="selectAnswer(37, 'D')">D</button>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">38.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(38, 'A')">A</button>
+          <button class="option-btn" onclick="selectAnswer(38, 'B')">B</button>
+          <button class="option-btn" onclick="selectAnswer(38, 'C')">C</button>
+          <button class="option-btn" onclick="selectAnswer(38, 'D')">D</button>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">39.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(39, 'A')">A</button>
+          <button class="option-btn" onclick="selectAnswer(39, 'B')">B</button>
+          <button class="option-btn" onclick="selectAnswer(39, 'C')">C</button>
+          <button class="option-btn" onclick="selectAnswer(39, 'D')">D</button>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">40.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(40, 'A')">A</button>
+          <button class="option-btn" onclick="selectAnswer(40, 'B')">B</button>
+          <button class="option-btn" onclick="selectAnswer(40, 'C')">C</button>
+          <button class="option-btn" onclick="selectAnswer(40, 'D')">D</button>
+        </div>
+      </div>
+
+      <div class="text-center mt-16">
+        <button onclick="submitTest()" class="bg-green-600 hover:bg-green-700 text-white font-bold py-8 px-32 rounded-xl text-4xl shadow-2xl">
+          NỘP BÀI
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Màn hình kết quả -->
+<div id="resultScreen" class="hidden min-h-screen flex items-center justify-center p-6 bg-gradient-to-br from-green-50 to-blue-50">
+  <div class="max-w-4xl w-full bg-white rounded-3xl shadow-2xl p-16 text-center">
+    <h1 class="text-6xl font-bold text-green-700 mb-8">HOÀN THÀNH!</h1>
+    <div class="text-9xl font-bold text-green-600 mb-6" id="finalScore">0%</div>
+    <p class="text-4xl mb-4">Đúng <span id="correctCount">0</span>/40 câu</p>
+    <p class="text-3xl text-gray-700 mb-12">Thời gian: <span id="finalTime">00:00</span></p>
+
+    <div class="bg-red-50 border-2 border-red-400 rounded-2xl p-8 mb-10">
+      <p class="text-2xl font-bold text-red-800">Câu sai: <span id="wrongList" class="font-mono">Không có</span></p>
+    </div>
+
+    <div class="bg-blue-50 border-2 border-blue-400 rounded-2xl p-8 text-left">
+      <p class="text-2xl font-bold text-blue-800 mb-4">Lịch sử làm bài:</p>
+      <div id="timelineDisplay" class="text-lg space-y-2 font-mono"></div>
+    </div>
+
+    <div class="mt-12 flex flex-wrap gap-6 justify-center">
+      <button onclick="showReview()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-6 px-16 rounded-xl text-3xl shadow-2xl">
+        XEM LẠI BÀI
+      </button>
+      <button onclick="location.reload()" class="bg-green-600 hover:bg-green-700 text-white font-bold py-6 px-16 rounded-xl text-3xl shadow-2xl">
+        LÀM LẠI BÀI
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+const URL = 'https://script.google.com/macros/s/AKfycbyoDCkEfUrvMH-GRpBRlih2xhR1dcHfBPyoKFJuJaycZCsR-HQgmD07xRU9BjRPg67x/exec';
+const TEST_NAME = 'Tenses & Passive Voice - Công lập';
+const TOTAL_QUESTIONS = 40;
+
+// ĐÁP ÁN ĐÚNG — nhúng sẵn trong file để tự chấm điểm ngay trên trình duyệt
+const correctAnswers = {
+  1:'B', 2:'A', 3:'B', 4:'A', 5:'B', 6:'B', 7:'B', 8:'B', 9:'A', 10:'A',
+  11:'B', 12:'A', 13:'C', 14:'B', 15:'B', 16:'A', 17:'A', 18:'B', 19:'A', 20:'A',
+  21:'B', 22:'A', 23:'B', 24:'A', 25:'A', 26:'B', 27:'B', 28:'C', 29:'D', 30:'B',
+  31:'B', 32:'D', 33:'A', 34:'B', 35:'B', 36:'A', 37:'B', 38:'A', 39:'C', 40:'D'
+};
+
+// GIẢI THÍCH ĐÁP ÁN bằng tiếng Việt — hiển thị khi học sinh bấm "Xem lại bài"
+const explanations = {
+  1: "Đoạn văn kể chuyện Mai gặp khó khăn nhưng đã vượt qua nhờ hành động tích cực. Chỉ có đáp án B dùng từ nối \"So\" (vì vậy) diễn tả một hành động mang tính xây dựng (hỏi cô giáo, ôn bài mỗi tối) hợp lý với mạch truyện thành công phía sau. Các đáp án A, C, D đều mang nghĩa tiêu cực, bỏ cuộc — không phù hợp với ngữ cảnh.",
+  2: "Câu (c) \"At first, this made her feel...\" có từ \"this\" chỉ về hành động ở cuối đoạn trước (hỏi cô giáo, ôn bài mỗi tối), nên (c) phải đứng đầu. Tiếp theo cô ấy có thêm hành động khác — lập thời gian biểu học cố định ở nhà (b). Cuối cùng là kết quả đạt được — điểm số cải thiện (a). Thứ tự đúng: c – b – a.",
+  3: "\"Conventional\" (thông thường, theo lối mòn) có nghĩa gần nhất với \"traditional\" (truyền thống). \"Unusual\" là nghĩa trái ngược, \"modern\" và \"creative\" không phù hợp ngữ nghĩa.",
+  4: "\"This willingness to explore\" nhắc lại đặc điểm của những học sinh tò mò, thích thử hoạt động mới được nói ở câu trước — tức là việc \"trở thành một học sinh ham học hỏi\" (being a curious student). Đây là đại từ thay thế cho cả một ý, không chỉ một hành động cụ thể.",
+  5: "Đoạn văn nói rõ: các câu lạc bộ ngoại khóa giúp học sinh \"find out what they are naturally good at\" — tức khám phá ra thế mạnh mà mình chưa từng biết. Đây chính là ý của đáp án B.",
+  6: "Bài đọc nêu rõ câu lạc bộ ngoại khóa giúp học sinh \"find out what they are naturally good at\" (tìm ra điều mình giỏi một cách tự nhiên) — trùng khớp với đáp án B.",
+  7: "Cả bài đọc xoay quanh việc thử các hoạt động mới (câu lạc bộ) giúp học sinh hiểu rõ bản thân và chọn được con đường phù hợp — đây chính là ý chính của toàn bài, đúng với đáp án B.",
+  8: "\"Committed\" nghĩa là tận tâm, kiên trì theo đuổi. Từ trái nghĩa phù hợp nhất trong 4 lựa chọn là \"careless\" (bất cẩn, hời hợt — không có sự cam kết). \"Dedicated\" là từ đồng nghĩa, còn \"curious\", \"confident\" không liên quan trực tiếp.",
+  9: "Sau động từ khuyết thiếu \"should\" luôn dùng động từ nguyên mẫu không \"to\": should + V (bare infinitive) → \"should set\".",
+  10: "Cấu trúc bị động với động từ tường thuật: \"It is believed that + mệnh đề\" = \"S + is/are believed + to V\". Chủ ngữ \"This approach\" số ít nên dùng \"is believed to reduce...\".",
+  11: "Đây là mệnh đề quan hệ rút gọn ở thể bị động bổ nghĩa cho \"a study plan\": \"a study plan (which is) designed around...\". Vì chủ ngữ số ít và mang nghĩa bị động (kế hoạch được thiết kế), đáp án đúng là \"is designed\".",
+  12: "\"Many students\" (chủ ngữ số nhiều) + động từ thường ở thì hiện tại đơn diễn tả một hiện tượng chung: \"fall behind\" (bị tụt lại phía sau) — không chia theo ngôi số ít nên không dùng \"falls\".",
+  13: "Có mốc thời gian \"By the end of the term\" kết hợp ý \"đã làm việc liên tục cho đến thời điểm đó\" → dùng thì hiện tại hoàn thành: \"who have worked consistently\".",
+  14: "Chủ ngữ số ít \"a weakness\" + động từ thường ở hiện tại đơn diễn tả sự thật chung: \"a weakness turns into a strength\" (không chia \"turn\", không bị động vì \"weakness\" là chủ thể tự chuyển hóa).",
+  15: "Thông báo nhấn mạnh: sau khi bấm \"Submit\" sẽ không thể chỉnh sửa được nữa, nên học sinh cần kiểm tra kỹ trước khi nộp — đúng với ý của đáp án B. Đáp án A trái ngược hoàn toàn với nội dung thông báo.",
+  16: "Thông báo yêu cầu đến sớm 10 phút và cảnh báo người đến muộn \"may not be allowed to join\". Điều này ngụ ý rằng ngay cả học sinh đến đúng giờ (nhưng không đến sớm 10 phút) vẫn có thể bị coi là muộn và bị từ chối — đúng với đáp án A.",
+  17: "\"Arrive... 30 minutes ______ the starting time\" cần giới từ chỉ thời gian trước một mốc: \"before\" (trước giờ bắt đầu).",
+  18: "\"Remember to ______ your student ID card\" — \"bring\" (mang theo) là động từ phù hợp nhất khi nói về việc mang vật gì đó đến một nơi.",
+  19: "\"Raise your hand and ______ the supervisor\" — \"inform\" (thông báo cho ai đó biết) là lựa chọn phù hợp nhất trong ngữ cảnh báo với giám thị.",
+  20: "\"Do your best\" là cụm cố định (collocation) nghĩa là \"cố gắng hết sức\" — không dùng với make/take/give trong ngữ cảnh này.",
+  21: "\"Difficult to ______ new vocabulary\" — \"memorize\" (ghi nhớ) là động từ phù hợp nhất khi nói về việc học và nhớ từ vựng.",
+  22: "\"Felt very ______ about her chances of passing\" — \"confident\" (tự tin) phù hợp với ngữ cảnh sau nhiều tháng cố gắng học tập.",
+  23: "\"Unfairly ______ students for problems that were not really their fault\" — \"blame\" (đổ lỗi) phù hợp với từ \"unfairly\" (một cách bất công).",
+  24: "Khi được khen ngợi, cách đáp lại lịch sự và tự nhiên nhất là cảm ơn: \"That's very kind of you to say, thank you!\". \"You're welcome\" dùng để đáp lại lời cảm ơn, không phải lời khen.",
+  25: "\"Encouraged him to ______ a new hobby\" — \"take up\" (bắt đầu theo đuổi một sở thích mới) là cụm động từ phù hợp nhất.",
+  26: "Danh động từ (V-ing) được dùng làm chủ ngữ của câu: \"Memorizing new information without understanding it properly rarely helps...\" — chủ ngữ phải là V-ing, không phải động từ chia.",
+  27: "Câu điều kiện dùng để đưa ra lời khuyên ở mệnh đề chính: \"If you struggle..., ask your teacher...\" dùng động từ nguyên mẫu (câu mệnh lệnh) \"ask\".",
+  28: "Thì quá khứ tiếp diễn (was preparing) diễn tả hành động đang xảy ra thì bị một hành động khác xen vào ở thì quá khứ đơn: \"While she was preparing..., she discovered...\".",
+  29: "Tổ hợp \"ch\" trong achievement, challenging, teacher đều được phát âm là /tʃ/, riêng trong \"scholar\" tổ hợp \"ch\" được phát âm là /k/ — khác với 3 từ còn lại.",
+  30: "Câu hỏi phân biệt cách phát âm nguyên âm \"ea\". \"break\" /breɪk/ có cách phát âm khác biệt so với \"weakness\", \"really\", \"teacher\" (đều có \"ea\" đọc gần /iː/)",
+  31: "\"Already\" thường đi với thì hiện tại hoàn thành: \"has already explained\". Đáp án B đúng cấu trúc và trật tự từ (has already + V3).",
+  32: "\"This report\" chịu tác động (bị hoàn thành) nên phải dùng bị động với động từ khuyết thiếu: \"must be + V3\" → \"This report must be finished by the team before the deadline.\"",
+  33: "Câu trực tiếp là một lời khuyên (\"You should...\") nên khi chuyển sang câu gián tiếp dùng cấu trúc: \"advise + O + to V\": \"The tutor advised Lan to keep a consistent study routine...\".",
+  34: "Câu gốc so sánh việc ôn bài hằng ngày hiệu quả hơn học dồn trước kỳ thi. Đáp án B diễn đạt lại đúng ý này bằng cấu trúc so sánh hơn: \"Daily review is generally more effective... than last-minute cramming.\"",
+  35: "Trọng âm của \"curious\" rơi vào âm tiết thứ nhất (CU-ri-ous), khác với \"determine\", \"achievement\", \"potential\" đều có trọng âm rơi vào âm tiết thứ hai.",
+  36: "Trọng âm của \"confident\" rơi vào âm tiết thứ nhất (CON-fi-dent), khác với \"effective\", \"essential\", \"demanding\" đều có trọng âm rơi vào âm tiết thứ hai.",
+  37: "Câu trước nói về lợi ích của việc học một mình (tập trung, tránh xao nhãng). Đáp án B \"This makes it easier to focus deeply on difficult topics without interruption\" tiếp nối trực tiếp và bổ sung ý cho câu đó.",
+  38: "Đoạn văn đang nói về việc trước đây nhiều học sinh bỏ cuộc vì không có ai để hỏi khi học một mình. Đáp án A \"Today, however, many schools organise peer-tutoring programmes...\" tạo tương phản hợp lý với \"in the past\" bằng từ nối \"however\".",
+  39: "Câu trước nói về việc lựa chọn phương pháp học tùy thuộc thói quen cá nhân. Đáp án C \"For this reason, some students even switch between the two methods...\" tiếp nối logic, cho thấy hệ quả của việc mỗi người có thói quen khác nhau.",
+  40: "Câu kết bài khẳng định không có lựa chọn đúng duy nhất cho mọi học sinh. Đáp án D \"What matters most is finding the method that suits each student's own personality\" phù hợp làm câu kết luận, nhấn mạnh việc phù hợp với từng cá nhân."
+};
+
+let student = null, startTime = null, timer = null;
+let answers = {}, timeline = [], tabSwitches = 0;
+let reviewMode = false;
+
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'hidden' && !document.getElementById('testScreen').classList.contains('hidden')) {
+    tabSwitches++;
+    const t = new Date().toLocaleTimeString('vi-VN');
+    timeline.push(`Chuyển tab lúc ${t}`);
+  }
+});
+
+function verifyStudent() {
+  const code = document.getElementById('studentCode').value.trim().toUpperCase();
+  if (!code) return alert('Nhập mã học sinh!');
+
+  fetch(`${URL}?action=verify&code=${code}`)
+    .then(r => r.json())
+    .then(d => {
+      if (!d.exists) return alert('Mã không tồn tại!');
+      student = {code, name: d.studentName || code};
+      document.getElementById('headerName').textContent = student.name;
+      document.getElementById('codeScreen').classList.add('hidden');
+      document.getElementById('testScreen').classList.remove('hidden');
+      startTime = Date.now();
+
+      timer = setInterval(() => {
+        const s = Math.floor((Date.now() - startTime) / 1000);
+        const m = String(Math.floor(s / 60)).padStart(2, '0');
+        const sec = String(s % 60).padStart(2, '0');
+        document.getElementById('timer').textContent = `${m}:${sec}`;
+        const answered = Object.keys(answers).filter(k => answers[k]).length;
+        document.getElementById('progress').style.width = `${(answered / TOTAL_QUESTIONS) * 100}%`;
+      }, 500);
+    })
+    .catch(err => alert('Lỗi kết nối: ' + err.message));
+}
+
+function selectAnswer(questionNum, option) {
+  if (reviewMode) return;
+  const time = new Date().toLocaleTimeString('vi-VN', {hour: '2-digit', minute: '2-digit', second: '2-digit'});
+  const buttons = document.querySelectorAll(`#testScreen .question-box:has(button[onclick*="selectAnswer(${questionNum},"]) .option-btn`);
+  buttons.forEach(btn => btn.classList.remove('selected'));
+  event.target.classList.add('selected');
+  if (!answers[questionNum]) {
+    timeline.push(`Câu ${questionNum}: ${option} (${time})`);
+  } else if (answers[questionNum] !== option) {
+    timeline.push(`→ Đổi câu ${questionNum} thành ${option} (${time})`);
+  }
+  answers[questionNum] = option;
+}
+
+// Tự chấm điểm dựa trên đáp án nhúng sẵn trong file (correctAnswers ở trên)
+function gradeLocally() {
+  let correctCount = 0;
+  const wrongQuestions = [];
+  for (let i = 1; i <= TOTAL_QUESTIONS; i++) {
+    if (answers[i] && answers[i] === correctAnswers[i]) {
+      correctCount++;
+    } else {
+      wrongQuestions.push(i);
+    }
+  }
+  const score = Math.round((correctCount / TOTAL_QUESTIONS) * 100);
+  return {score, correctCount, wrongQuestions};
+}
+
+function submitTest() {
+  const answered = Object.keys(answers).filter(k => answers[k]).length;
+  if (answered < TOTAL_QUESTIONS && !confirm(`Còn ${TOTAL_QUESTIONS - answered} câu trống. Nộp luôn?`)) return;
+  const submitBtn = document.querySelector('button[onclick="submitTest()"]');
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.textContent = '⏳ Đang nộp bài...';
+    submitBtn.style.opacity = '0.6';
+  }
+  clearInterval(timer);
+  const duration = document.getElementById('timer').textContent;
+  const realTime = new Date().toLocaleString('vi-VN');
+
+  // Chấm điểm ngay trên trình duyệt bằng đáp án nhúng sẵn
+  const result = gradeLocally();
+
+  const data = {
+    testName: TEST_NAME,
+    studentCode: student.code,
+    studentName: student.name,
+    answers: answers,
+    score: result.score,
+    correctCount: result.correctCount,
+    wrongQuestions: result.wrongQuestions.join(', '),
+    timeUsed: duration,
+    realSubmitTime: realTime,
+    timeline: timeline.join(' | '),
+    tabSwitchLog: tabSwitches > 0 ? `Chuyển tab ${tabSwitches} lần` : 'Không chuyển tab',
+    totalQuestions: TOTAL_QUESTIONS
+  };
+
+  // Hiển thị kết quả ngay lập tức cho học sinh, không phụ thuộc phản hồi của Apps Script
+  showResult(result, duration);
+
+  // Vẫn gửi dữ liệu về Google Sheet để lưu trữ / giáo viên theo dõi
+  fetch(`${URL}?action=submit&data=${encodeURIComponent(JSON.stringify(data))}`)
+    .then(r => r.json())
+    .catch(err => {
+      console.warn('Không gửi được lên Google Sheet, nhưng điểm đã hiển thị cho học sinh:', err.message);
+    });
+}
+
+function showResult(result, duration) {
+  document.getElementById('testScreen').classList.add('hidden');
+  document.getElementById('resultScreen').classList.remove('hidden');
+  document.getElementById('finalScore').textContent = result.score + '%';
+  document.getElementById('correctCount').textContent = result.correctCount;
+  document.getElementById('finalTime').textContent = duration;
+  document.getElementById('wrongList').textContent = result.wrongQuestions.length ? result.wrongQuestions.join(', ') : 'Không có';
+
+  const tl = document.getElementById('timelineDisplay');
+  timeline.forEach(l => {
+    const p = document.createElement('p');
+    p.textContent = l;
+    tl.appendChild(p);
+  });
+  if (tabSwitches > 0) {
+    const warn = document.createElement('p');
+    warn.className = 'text-red-600 font-bold text-xl';
+    warn.textContent = `Phát hiện chuyển tab ${tabSwitches} lần!`;
+    tl.appendChild(warn);
+  }
+}
+
+// ===== XEM LẠI BÀI =====
+function showReview() {
+  reviewMode = true;
+  document.getElementById('resultScreen').classList.add('hidden');
+  document.getElementById('testScreen').classList.remove('hidden');
+
+  const submitBtn = document.querySelector('button[onclick="submitTest()"]');
+  if (submitBtn) submitBtn.parentElement.style.display = 'none';
+
+  const container = document.querySelector('#testScreen .max-w-6xl');
+
+  if (!document.getElementById('reviewToolbar')) {
+    const toolbar = document.createElement('div');
+    toolbar.id = 'reviewToolbar';
+    toolbar.className = 'review-legend';
+    toolbar.innerHTML = `
+      <button onclick="backToResult()" class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-xl text-xl shadow-lg">⬅ Quay lại kết quả</button>
+      <span><span class="legend-dot" style="background:#4CAF50;"></span>Đáp án đúng</span>
+      <span><span class="legend-dot" style="background:#f44336;"></span>Đáp án bạn chọn (sai)</span>
+    `;
+    container.insertBefore(toolbar, container.firstChild);
+  }
+
+  renderReview();
+  window.scrollTo(0, 0);
+}
+
+function backToResult() {
+  document.getElementById('testScreen').classList.add('hidden');
+  document.getElementById('resultScreen').classList.remove('hidden');
+}
+
+function renderReview() {
+  for (let i = 1; i <= TOTAL_QUESTIONS; i++) {
+    const box = document.querySelector(`#testScreen .question-box:has(button[onclick*="selectAnswer(${i},"])`);
+    if (!box) continue;
+
+    const buttons = box.querySelectorAll('.option-btn');
+    buttons.forEach(btn => {
+      const m = btn.getAttribute('onclick').match(/selectAnswer\(\d+,\s*'([A-D])'\)/);
+      const opt = m ? m[1] : null;
+      btn.classList.remove('selected', 'correct-ans', 'wrong-ans');
+      btn.style.pointerEvents = 'none';
+      if (opt === correctAnswers[i]) {
+        btn.classList.add('correct-ans');
+      } else if (opt === answers[i]) {
+        btn.classList.add('wrong-ans');
+      }
+    });
+
+    let expDiv = box.querySelector('.explanation-box');
+    if (!expDiv) {
+      expDiv = document.createElement('div');
+      expDiv.className = 'explanation-box';
+      box.appendChild(expDiv);
+    }
+    const isCorrect = answers[i] === correctAnswers[i];
+    const statusHtml = answers[i]
+      ? (isCorrect
+          ? '<span class="exp-status text-green-700">✅ Bạn đã trả lời ĐÚNG</span>'
+          : `<span class="exp-status text-red-700">❌ Bạn đã trả lời SAI (đã chọn ${answers[i]})</span>`)
+      : '<span class="exp-status text-gray-600">⚪ Bạn chưa trả lời câu này</span>';
+    expDiv.innerHTML = `<p class="font-bold mb-2">${statusHtml} — Đáp án đúng: <span class="text-green-700 font-bold">${correctAnswers[i]}</span></p><p>${explanations[i] || 'Đang cập nhật giải thích.'}</p>`;
+  }
+}
+</script>
+</body>
+</html>
