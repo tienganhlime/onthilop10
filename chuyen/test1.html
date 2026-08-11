@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Đề luyện thi Chuyên - Vocabulary, Word Form & Reading</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body {font-family: 'Quicksand', sans-serif; background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%); font-size: 1.5rem;}
+  .question-box {background: #f8f9fa; padding: 20px; border-radius: 20px; margin-bottom: 20px; border-left: 4px solid #4CAF50;}
+  .option-btn {padding: 12px 24px; margin: 8px; border: 2px solid #ddd; border-radius: 20px; background: white;
+               cursor: pointer; transition: all 0.3s; font-size: 20px; min-width: 120px;
+               font-variant-ligatures: none !important;
+               font-feature-settings: "liga" 0 !important;}
+  .option-btn:hover {border-color: #4CAF50; background: #f0fff0;}
+  .option-btn.selected {border-color: #4CAF50; background: #4CAF50; color: white; font-weight: bold;}
+  .section-title {color: #FF6B6B; font-size: 2rem; font-weight: bold; margin: 30px 0 15px 0; padding-bottom: 10px; border-bottom: 3px solid #FF6B6B;}
+  .section-note {color: #555; font-size: 1.05rem; margin: -10px 0 15px 0; font-style: italic;}
+  .font-bold { font-size: 1.5rem; }
+  .option-btn.correct-ans {border-color: #4CAF50; background: #4CAF50; color: white; font-weight: bold; cursor: default;}
+  .option-btn.wrong-ans {border-color: #f44336; background: #f44336; color: white; font-weight: bold; cursor: default;}
+  .explanation-box {background: #FFF9C4; border-left: 5px solid #FBC02D; padding: 16px 20px; border-radius: 12px; margin-top: 14px; font-size: 1.15rem; line-height: 1.6; color: #3a3a3a;}
+  .explanation-box .exp-status { font-size: 1.2rem; }
+  .review-legend {background: white; border-radius: 16px; padding: 16px 24px; margin-bottom: 16px; font-size: 1.2rem; display: flex; gap: 24px; align-items: center; flex-wrap: wrap;}
+  .legend-dot {display:inline-block; width:22px; height:22px; border-radius:6px; vertical-align:middle; margin-right:6px;}
+  .brand-bar {display:flex; align-items:center; gap:10px; font-size:0.95rem; color:#2e7d32;}
+  .brand-bar img {height:32px; width:auto; object-fit:contain;}
+  .brand-bar .brand-text {line-height:1.2;}
+  .brand-bar .brand-name {font-weight:700; font-size:1rem;}
+  .brand-bar .brand-hotline {font-size:0.85rem; color:#555;}
+  .text-input-ans {width:100%; max-width:500px; padding:12px 18px; border:2px solid #ddd; border-radius:16px; font-size:20px; margin-top:8px; font-family:'Quicksand', sans-serif;}
+  .text-input-ans:focus {outline:none; border-color:#4CAF50; background:#f0fff0;}
+  .text-input-ans.correct-text {border-color:#4CAF50; background:#e8f5e9;}
+  .text-input-ans.wrong-text {border-color:#f44336; background:#ffebee;}
+  .manual-badge {display:inline-block; background:#FFE0B2; color:#E65100; font-size:0.9rem; font-weight:bold; padding:4px 12px; border-radius:12px; margin-left:8px; vertical-align:middle;}
+  .word-box {background:#E1F5FE; border:2px dashed #0288D1; border-radius:16px; padding:14px 20px; margin-bottom:20px; font-size:1.2rem; text-align:center;}
+  .error-word {text-decoration: underline wavy #f44336; text-decoration-thickness: 2px; font-weight:bold; color:#c62828;}
+  .qnum-badge {display:inline-flex; align-items:center; justify-content:center; background:#4CAF50; color:white; font-weight:bold; font-size:0.85rem; width:26px; height:26px; border-radius:50%; margin:0 3px; vertical-align:middle;}
+  .passage-box {background: #E3F2FD; padding: 24px; border-radius: 20px; margin-bottom: 20px; font-size: 1.25rem; line-height: 1.9;}
+</style>
+</head>
+<body>
+
+<!-- Màn hình nhập mã -->
+<div id="codeScreen" class="min-h-screen flex items-center justify-center p-6">
+  <div class="max-w-2xl w-full bg-white rounded-2xl shadow-2xl p-12 text-center">
+    <div class="flex items-center justify-center gap-3 mb-6">
+      <img src="https://gofirst.pro/images/uploads/62/baseimg/logo_16541442053.png" alt="LIME logo" class="h-14 w-auto object-contain">
+      <div class="text-left">
+        <p class="font-bold text-green-700 text-xl leading-tight">Trung Tâm Ngoại Ngữ LIME</p>
+        <p class="text-gray-600 text-base leading-tight">Hotline: 0976222792</p>
+      </div>
+    </div>
+    <h1 class="text-5xl font-bold text-green-700 mb-4">LUYỆN THI VÀO 10 CHUYÊN</h1>
+    <h2 class="text-3xl font-bold text-orange-600 mb-8">Tenses & Passive - Chuyên - Practice Test</h2>
+    <input type="text" id="studentCode" class="w-full px-6 py-5 text-3xl border-4 border-green-400 rounded-xl uppercase text-center mb-8" placeholder="Nhập mã học sinh">
+    <button onclick="verifyStudent()" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-6 rounded-xl text-3xl shadow-2xl">BẮT ĐẦU</button>
+  </div>
+</div>
+
+<!-- Màn hình làm bài -->
+<div id="testScreen" class="hidden min-h-screen p-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="bg-white rounded-2xl shadow-md p-3 sticky top-0 z-10 mb-6">
+      <div class="flex justify-between items-center gap-4">
+        <div class="brand-bar">
+          <img src="https://gofirst.pro/images/uploads/62/baseimg/logo_16541442053.png" alt="LIME logo">
+          <div class="brand-text">
+            <div class="brand-name">Trung Tâm Ngoại Ngữ LIME</div>
+            <div class="brand-hotline">Hotline: 0976222792</div>
+          </div>
+        </div>
+        <h1 class="text-lg font-bold text-green-700 hidden md:block flex-1 text-center truncate px-2">Tenses & Passive - Chuyên - Practice Test</h1>
+        <div class="text-right whitespace-nowrap">
+          <p class="text-sm">Học sinh: <span id="headerName" class="font-bold"></span></p>
+          <p class="text-lg font-bold text-red-600">⏱ <span id="timer">00:00</span></p>
+        </div>
+      </div>
+      <div class="mt-2 bg-gray-300 rounded-full h-3">
+        <div id="progress" class="bg-green-600 h-full rounded-full transition-all" style="width:0%"></div>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow-2xl p-12">
+
+      <div class="bg-orange-50 border-2 border-orange-300 rounded-xl p-5 mb-8 text-lg text-orange-800">
+        📌 Đề gồm <strong>49 câu</strong>: 34 câu được <strong>tự động chấm điểm</strong> (trắc nghiệm + điền từ ngắn) và <strong>15 câu tự luận</strong> (sửa lỗi sai / hoàn thành câu / viết lại câu) sẽ hiển thị đáp án mẫu để em tự đối chiếu ở phần "Xem lại bài".
+      </div>
+
+      <!-- PART 1: Q1-8 -->
+      <div class="section-title">Part 1 (Q1–8). Choose the correct answer A, B, C, or D.</div>
+      <p class="section-note">Chú ý: các phương án nhiễu có nghĩa gần giống nhau — chỉ có một cụm là collocation chuẩn.</p>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">1. Local hospitals continue to __________ staff shortages every winter.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(1, 'A')">A. take the pressure of</button>
+          <button class="option-btn" onclick="selectAnswer(1, 'B')">B. bear the brunt of</button>
+          <button class="option-btn" onclick="selectAnswer(1, 'C')">C. hold the strain of</button>
+          <button class="option-btn" onclick="selectAnswer(1, 'D')">D. carry the weight of</button>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">2. After weeks of deadlock, the two departments finally __________ the new schedule.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(2, 'A')">A. reached a consensus on</button>
+          <button class="option-btn" onclick="selectAnswer(2, 'B')">B. settled a compromise on</button>
+          <button class="option-btn" onclick="selectAnswer(2, 'C')">C. reached an accord about</button>
+          <button class="option-btn" onclick="selectAnswer(2, 'D')">D. found an agreement on</button>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">3. While other clubs are losing members, this one has managed to __________.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(3, 'A')">A. reverse the direction</button>
+          <button class="option-btn" onclick="selectAnswer(3, 'B')">B. break the pattern</button>
+          <button class="option-btn" onclick="selectAnswer(3, 'C')">C. defy the current</button>
+          <button class="option-btn" onclick="selectAnswer(3, 'D')">D. buck the trend</button>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">4. His account of the meeting was __________ what actually happened.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(4, 'A')">A. way off from</button>
+          <button class="option-btn" onclick="selectAnswer(4, 'B')">B. a long way from</button>
+          <button class="option-btn" onclick="selectAnswer(4, 'C')">C. a far cry from</button>
+          <button class="option-btn" onclick="selectAnswer(4, 'D')">D. a big gap from</button>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">5. He's __________ punctuality — five minutes late is unacceptable to him.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(5, 'A')">A. a stickler for</button>
+          <button class="option-btn" onclick="selectAnswer(5, 'B')">B. a purist about</button>
+          <button class="option-btn" onclick="selectAnswer(5, 'C')">C. a perfectionist for</button>
+          <button class="option-btn" onclick="selectAnswer(5, 'D')">D. a fanatic for</button>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">6. In terms of reliability, this brand is __________ in the market.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(6, 'A')">A. top of the range</button>
+          <button class="option-btn" onclick="selectAnswer(6, 'B')">B. first among equals</button>
+          <button class="option-btn" onclick="selectAnswer(6, 'C')">C. second to none</button>
+          <button class="option-btn" onclick="selectAnswer(6, 'D')">D. best in class</button>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">7. He built the company almost single-handedly, __________ sheer determination.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(7, 'A')">A. by way of</button>
+          <button class="option-btn" onclick="selectAnswer(7, 'B')">B. by dint of</button>
+          <button class="option-btn" onclick="selectAnswer(7, 'C')">C. by means of</button>
+          <button class="option-btn" onclick="selectAnswer(7, 'D')">D. by virtue of</button>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">8. The new policy has __________ momentum since it was first proposed.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(8, 'A')">A. collected</button>
+          <button class="option-btn" onclick="selectAnswer(8, 'B')">B. gained</button>
+          <button class="option-btn" onclick="selectAnswer(8, 'C')">C. built</button>
+          <button class="option-btn" onclick="selectAnswer(8, 'D')">D. gathered</button>
+        </div>
+      </div>
+
+      <!-- PART 2: Q9-14 -->
+      <div class="section-title">Part 2 (Q9–14). Fill in each blank with the correct form of ONE word in the box.</div>
+      <p class="section-note">Có 8 từ trong hộp, chỉ cần dùng 6 từ (2 từ — MOMENT và TESTAMENT — là "bẫy", không cần dùng ở Part 2 này).</p>
+      <div class="word-box">DETERMINE &nbsp;•&nbsp; FLAW &nbsp;•&nbsp; RIVAL &nbsp;•&nbsp; COMPEL &nbsp;•&nbsp; PRESTIGE &nbsp;•&nbsp; VERSATILE &nbsp;•&nbsp; MOMENT &nbsp;•&nbsp; TESTAMENT</div>
+
+      <div class="passage-box">
+        <p class="font-bold text-center text-2xl mb-3">THE RESTORATION OF AN OLD THEATRE</p>
+        <p>The restoration of the old Municipal Theatre has <strong>(0) significantly</strong> changed the way locals think about the building.<br><br>
+        Restorers approached the eighteen-month project with real ____<span class="qnum-badge">9</span>____, refusing to rush even the smallest repairs.<br><br>
+        Every original joint was ____<span class="qnum-badge">10</span>____ matched to the building's nineteenth-century design, down to the smallest detail.<br><br>
+        Critics who inspected the finished brickwork called it ____<span class="qnum-badge">11</span>____ in the region, insisting nothing comparable existed anywhere nearby.<br><br>
+        For years before the project began, local officials had been ____<span class="qnum-badge">12</span>____ to postpone the renovation entirely due to repeated funding gaps.<br><br>
+        The theatre has since become one of the most ____<span class="qnum-badge">13</span>____ venues in the country, drawing visitors from far beyond the city.<br><br>
+        Architects also praised the building's newfound ____<span class="qnum-badge">14</span>____, since it can now host concerts, exhibitions, and lectures alike without any further structural changes.</p>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">9.</p>
+        <input type="text" class="text-input-ans" oninput="updateTextAnswer(9, this.value)" onblur="logTextAnswer(9)" placeholder="Nhập đáp án...">
+      </div>
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">10.</p>
+        <input type="text" class="text-input-ans" oninput="updateTextAnswer(10, this.value)" onblur="logTextAnswer(10)" placeholder="Nhập đáp án...">
+      </div>
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">11.</p>
+        <input type="text" class="text-input-ans" oninput="updateTextAnswer(11, this.value)" onblur="logTextAnswer(11)" placeholder="Nhập đáp án...">
+      </div>
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">12.</p>
+        <input type="text" class="text-input-ans" oninput="updateTextAnswer(12, this.value)" onblur="logTextAnswer(12)" placeholder="Nhập đáp án...">
+      </div>
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">13.</p>
+        <input type="text" class="text-input-ans" oninput="updateTextAnswer(13, this.value)" onblur="logTextAnswer(13)" placeholder="Nhập đáp án...">
+      </div>
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">14.</p>
+        <input type="text" class="text-input-ans" oninput="updateTextAnswer(14, this.value)" onblur="logTextAnswer(14)" placeholder="Nhập đáp án...">
+      </div>
+
+      <!-- PART 3: Q15-19 -->
+      <div class="section-title">Part 3 (Q15–19). The passage below contains FIVE mistakes (grammar, vocabulary, or prepositions). Find and correct them.<span class="manual-badge">Tự luận</span></div>
+      <p class="section-note">Đoạn văn KHÔNG được đánh dấu sẵn lỗi — em phải tự đọc và tìm ra từ/cụm từ sai, sau đó ghi lại theo đúng mẫu ví dụ câu (0) bên dưới.</p>
+
+      <div class="passage-box">
+        <p>A small bakery on Đội Cấn have quietly built a loyal following over the past five years. The owner insist the growth was no accident, but the result of a far-sighted decision to focus on quality rather than speed. Regular customers say the bread has always be a benchmark for freshness in the area. Some early suppliers, frustrated by the slow turnaround, eventually pulled they contract altogether. Looking back, the owner now describes that period as the making from the bakery rather than a setback, since it forced her to build a reputation few rivals could easy match.</p>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">(0) Ví dụ mẫu: have → has</p>
+      </div>
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">15. Lỗi thứ 1 (viết theo mẫu: từ sai → từ đúng)</p>
+        <input type="text" class="text-input-ans" oninput="updateTextAnswer(15, this.value)" onblur="logTextAnswer(15)" placeholder="vd: is → are">
+      </div>
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">16. Lỗi thứ 2 (viết theo mẫu: từ sai → từ đúng)</p>
+        <input type="text" class="text-input-ans" oninput="updateTextAnswer(16, this.value)" onblur="logTextAnswer(16)" placeholder="vd: is → are">
+      </div>
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">17. Lỗi thứ 3 (viết theo mẫu: từ sai → từ đúng)</p>
+        <input type="text" class="text-input-ans" oninput="updateTextAnswer(17, this.value)" onblur="logTextAnswer(17)" placeholder="vd: is → are">
+      </div>
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">18. Lỗi thứ 4 (viết theo mẫu: từ sai → từ đúng)</p>
+        <input type="text" class="text-input-ans" oninput="updateTextAnswer(18, this.value)" onblur="logTextAnswer(18)" placeholder="vd: is → are">
+      </div>
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">19. Lỗi thứ 5 (viết theo mẫu: từ sai → từ đúng)</p>
+        <input type="text" class="text-input-ans" oninput="updateTextAnswer(19, this.value)" onblur="logTextAnswer(19)" placeholder="vd: is → are">
+      </div>
+
+      <!-- PART 4: Q20-24 Reading fill in the blank -->
+      <div class="section-title">Part 4 (Q20–24). READING — Fill in each numbered space with ONE suitable word.</div>
+
+      <div class="passage-box">
+        <p class="font-bold text-center text-2xl mb-3">A FAMILY WORKSHOP'S QUIET EXPANSION</p>
+        <p>A small furniture company in Bắc Ninh has grown steadily over the past decade, driven largely ____<span class="qnum-badge">20</span>____ pursuit of a single guiding principle: never compromise on materials, even at the risk of a smaller profit margin. ____<span class="qnum-badge">21</span>____ virtue of its reputation for consistency, the company has secured contracts with several national retailers — an achievement few workshops of its size can claim.<br><br>
+        Not every decision has been welcomed, however. ____<span class="qnum-badge">22</span>____ the grounds of cost, several long-time employees opposed last year's expansion. Critics argue the company has grown ____<span class="qnum-badge">23</span>____ the expense of its original small-batch philosophy, though the owners disagree, insisting the change was made ____<span class="qnum-badge">24</span>____ the sake of the craftsmen who had stayed loyal since the very start.</p>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">20.</p>
+        <input type="text" class="text-input-ans" oninput="updateTextAnswer(20, this.value)" onblur="logTextAnswer(20)" placeholder="Nhập một từ...">
+      </div>
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">21.</p>
+        <input type="text" class="text-input-ans" oninput="updateTextAnswer(21, this.value)" onblur="logTextAnswer(21)" placeholder="Nhập một từ...">
+      </div>
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">22.</p>
+        <input type="text" class="text-input-ans" oninput="updateTextAnswer(22, this.value)" onblur="logTextAnswer(22)" placeholder="Nhập một từ...">
+      </div>
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">23.</p>
+        <input type="text" class="text-input-ans" oninput="updateTextAnswer(23, this.value)" onblur="logTextAnswer(23)" placeholder="Nhập một từ...">
+      </div>
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">24.</p>
+        <input type="text" class="text-input-ans" oninput="updateTextAnswer(24, this.value)" onblur="logTextAnswer(24)" placeholder="Nhập một từ...">
+      </div>
+
+      <!-- PART 5: Q25-29 T/F/NG -->
+      <div class="section-title">Part 5 (Q25–29). Read and choose TRUE / FALSE / NOT GIVEN.</div>
+
+      <div class="passage-box">
+        <p class="font-bold text-center text-2xl mb-3">A VIOLIN MAKER'S QUIET RISE</p>
+        <p>For most of her twenties, Vy Anh worked in near-total obscurity, repairing instruments in a small workshop her grandfather had left her. She had never studied under a master craftsman, and for years she was widely seen as punching above her weight whenever she attempted to build an instrument of her own rather than simply repair others'.<br><br>
+        Her first few violins were, by her own admission, far from flawless. Rather than selling them quickly to recover her costs, she kept every rejected attempt in a back room, insisting she would rather lose money than let an imperfect instrument leave her workshop. It took nearly three years before she considered a single violin good enough to sell.<br><br>
+        That patience eventually paid off. A touring musician who tried one of her instruments by chance recommended her to several colleagues, and within a year, Vy Anh had a waiting list stretching well into the following season. She remains at pains to stress, however, that the turning point was not luck but simply years of refusing to lower her own standards.<br><br>
+        Today, her workshop is often cited as a benchmark for craftsmanship among younger instrument makers in the city, though she still works largely alone.</p>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">25. Vy Anh trained under a well-known master craftsman before opening her own workshop.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(25, 'A')">A. TRUE</button>
+          <button class="option-btn" onclick="selectAnswer(25, 'B')">B. FALSE</button>
+          <button class="option-btn" onclick="selectAnswer(25, 'C')">C. NOT GIVEN</button>
+        </div>
+      </div>
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">26. It took her nearly three years before she felt any violin she made was ready to be sold.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(26, 'A')">A. TRUE</button>
+          <button class="option-btn" onclick="selectAnswer(26, 'B')">B. FALSE</button>
+          <button class="option-btn" onclick="selectAnswer(26, 'C')">C. NOT GIVEN</button>
+        </div>
+      </div>
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">27. Most of Vy Anh's current customers are recommended to her by professional musicians.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(27, 'A')">A. TRUE</button>
+          <button class="option-btn" onclick="selectAnswer(27, 'B')">B. FALSE</button>
+          <button class="option-btn" onclick="selectAnswer(27, 'C')">C. NOT GIVEN</button>
+        </div>
+      </div>
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">28. Vy Anh believes her success was largely a matter of good timing and luck.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(28, 'A')">A. TRUE</button>
+          <button class="option-btn" onclick="selectAnswer(28, 'B')">B. FALSE</button>
+          <button class="option-btn" onclick="selectAnswer(28, 'C')">C. NOT GIVEN</button>
+        </div>
+      </div>
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">29. Vy Anh has recently taken on apprentices to help expand her workshop.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(29, 'A')">A. TRUE</button>
+          <button class="option-btn" onclick="selectAnswer(29, 'B')">B. FALSE</button>
+          <button class="option-btn" onclick="selectAnswer(29, 'C')">C. NOT GIVEN</button>
+        </div>
+      </div>
+
+      <!-- PART 6: Q30-33 paragraph matching -->
+      <div class="section-title">Part 6 (Q30–33). FOUR paragraphs have been removed. Choose from A–E (ONE is extra).</div>
+
+      <div class="passage-box">
+        <p class="font-bold text-center text-2xl mb-3">THE MARKET STALL THAT BECAME A BRAND</p>
+        <p>For nearly twenty years, Bà Liên sold homemade fish sauce from a single stall in the local market, known only to nearby households who had bought from her since her mother ran the same stall decades earlier. She had never once considered selling beyond the neighbourhood, content with the modest but steady income the stall provided.</p>
+        <p class="text-center my-3 font-bold text-lg">____ <span class="qnum-badge" style="width:34px;height:34px;font-size:1rem;">30</span> ____</p>
+        <p>Everything changed when a food blogger, trying the sauce purely by chance one afternoon, posted about it online without asking Liên first. Within days, messages began arriving from customers she had never met — most of which sat unanswered for nearly a week.</p>
+        <p class="text-center my-3 font-bold text-lg">____ <span class="qnum-badge" style="width:34px;height:34px;font-size:1rem;">31</span> ____</p>
+        <p>Rather than raising prices or hiring extra help to keep up with the sudden demand, Liên chose to keep production exactly as small as before. Several relatives urged her to reconsider, arguing she was leaving money on the table.</p>
+        <p class="text-center my-3 font-bold text-lg">____ <span class="qnum-badge" style="width:34px;height:34px;font-size:1rem;">32</span> ____</p>
+        <p>Some early customers grumbled about the long waiting times that followed, but most eventually came to see the scarcity as part of what made the product feel special in the first place, rather than a flaw in how the business was run.</p>
+        <p class="text-center my-3 font-bold text-lg">____ <span class="qnum-badge" style="width:34px;height:34px;font-size:1rem;">33</span> ____</p>
+        <p class="mt-4 font-bold">Missing paragraphs:</p>
+        <p>A. Her recipe, passed down from her mother's stall, had long earned a small but devoted following among locals who insisted no other vendor in the market came close to matching its flavour.<br>
+        B. That silence, it later turned out, had nothing to do with indifference — she had always been wary of trusting couriers with something so easily spoiled in transit, and had no other way of fulfilling orders from outside the neighbourhood.<br>
+        C. Encouraged by the sudden attention, she began posting videos of the bottling process herself, hoping the exposure would help her reach even more customers online.<br>
+        D. Rather than give in to her relatives' pressure, she quietly kept working exactly as she always had, and within a month the stall had built up a waiting list far longer than she had ever imagined.<br>
+        E. Today, her sauce is stocked in a handful of specialty shops across the city, though she still insists on bottling every single batch by hand herself.</p>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">30.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(30, 'A')">A</button>
+          <button class="option-btn" onclick="selectAnswer(30, 'B')">B</button>
+          <button class="option-btn" onclick="selectAnswer(30, 'C')">C</button>
+          <button class="option-btn" onclick="selectAnswer(30, 'D')">D</button>
+          <button class="option-btn" onclick="selectAnswer(30, 'E')">E</button>
+        </div>
+      </div>
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">31.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(31, 'A')">A</button>
+          <button class="option-btn" onclick="selectAnswer(31, 'B')">B</button>
+          <button class="option-btn" onclick="selectAnswer(31, 'C')">C</button>
+          <button class="option-btn" onclick="selectAnswer(31, 'D')">D</button>
+          <button class="option-btn" onclick="selectAnswer(31, 'E')">E</button>
+        </div>
+      </div>
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">32.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(32, 'A')">A</button>
+          <button class="option-btn" onclick="selectAnswer(32, 'B')">B</button>
+          <button class="option-btn" onclick="selectAnswer(32, 'C')">C</button>
+          <button class="option-btn" onclick="selectAnswer(32, 'D')">D</button>
+          <button class="option-btn" onclick="selectAnswer(32, 'E')">E</button>
+        </div>
+      </div>
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">33.</p>
+        <div class="flex flex-wrap">
+          <button class="option-btn" onclick="selectAnswer(33, 'A')">A</button>
+          <button class="option-btn" onclick="selectAnswer(33, 'B')">B</button>
+          <button class="option-btn" onclick="selectAnswer(33, 'C')">C</button>
+          <button class="option-btn" onclick="selectAnswer(33, 'D')">D</button>
+          <button class="option-btn" onclick="selectAnswer(33, 'E')">E</button>
+        </div>
+      </div>
+
+      <!-- PART 7: Q34-38 Writing sentence completion -->
+      <div class="section-title">Part 7 (Q34–38). Complete using the word given (3–8 words). Do not change the word given.<span class="manual-badge">Tự luận</span></div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">34. Small shops suffered the worst effects of the new parking rules. (BRUNT)<br>→ Small shops ____________________________________ the new parking rules.</p>
+        <input type="text" class="text-input-ans" oninput="updateTextAnswer(34, this.value)" onblur="logTextAnswer(34)" placeholder="Nhập câu trả lời...">
+      </div>
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">35. The idea is becoming increasingly accepted among young employees. (TRACTION)<br>→ The idea ____________________________________ among young employees.</p>
+        <input type="text" class="text-input-ans" oninput="updateTextAnswer(35, this.value)" onblur="logTextAnswer(35)" placeholder="Nhập câu trả lời...">
+      </div>
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">36. Nobody suspected even slightly that the two firms were about to merge. (INKLING)<br>→ Nobody ____________________________________ that the two firms were about to merge.</p>
+        <input type="text" class="text-input-ans" oninput="updateTextAnswer(36, this.value)" onblur="logTextAnswer(36)" placeholder="Nhập câu trả lời...">
+      </div>
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">37. The discovery signalled the beginning of a completely new approach to teaching science. (HERALDED)<br>→ The discovery ____________________________________ to teaching science.</p>
+        <input type="text" class="text-input-ans" oninput="updateTextAnswer(37, this.value)" onblur="logTextAnswer(37)" placeholder="Nhập câu trả lời...">
+      </div>
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">38. The two committees finally managed to agree on the new guidelines. (CONSENSUS)<br>→ The two committees finally ____________________________________ the new guidelines.</p>
+        <input type="text" class="text-input-ans" oninput="updateTextAnswer(38, this.value)" onblur="logTextAnswer(38)" placeholder="Nhập câu trả lời...">
+      </div>
+
+      <!-- PART 8: Q39-43 rewrite -->
+      <div class="section-title">Part 8 (Q39–43). Complete the second sentence, beginning with the words given, keeping the same meaning.<span class="manual-badge">Tự luận</span></div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">39. He built the whole business almost single-handedly through sheer persistence.<br>→ It was largely ____________________________________ that the whole business was built.</p>
+        <input type="text" class="text-input-ans" oninput="updateTextAnswer(39, this.value)" onblur="logTextAnswer(39)" placeholder="Nhập câu trả lời...">
+      </div>
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">40. The company's reputation for quality is unmatched by any of its rivals.<br>→ No rival ____________________________________ the company's reputation for quality.</p>
+        <input type="text" class="text-input-ans" oninput="updateTextAnswer(40, this.value)" onblur="logTextAnswer(40)" placeholder="Nhập câu trả lời...">
+      </div>
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">41. It was only after the scandal broke that shareholders realised how serious the losses were.<br>→ Not until the scandal broke ____________________________________.</p>
+        <input type="text" class="text-input-ans" oninput="updateTextAnswer(41, this.value)" onblur="logTextAnswer(41)" placeholder="Nhập câu trả lời...">
+      </div>
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">42. She refused to compromise on quality no matter how much pressure investors put on her.<br>→ Under no circumstances ____________________________________.</p>
+        <input type="text" class="text-input-ans" oninput="updateTextAnswer(42, this.value)" onblur="logTextAnswer(42)" placeholder="Nhập câu trả lời...">
+      </div>
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">43. Nobody had expected the campaign to gain so much support so quickly.<br>→ Rarely ____________________________________.</p>
+        <input type="text" class="text-input-ans" oninput="updateTextAnswer(43, this.value)" onblur="logTextAnswer(43)" placeholder="Nhập câu trả lời...">
+      </div>
+
+      <!-- PART 9: Q44-49 word form -->
+      <div class="section-title">Part 9 (Q44–49). Complete the formal article using the informal notes. ONE WORD per gap.</div>
+
+      <div class="bg-gray-100 rounded-xl p-6 mb-4 text-lg">
+        <p class="font-bold mb-2">INFORMAL NOTES — YOUNG INVENTORS FAIR</p>
+        <p>• Way more entries this year than ever, organisers didn't expect it.<br>
+        • Winning project — about clean water, judges said it was put together really well, nothing clunky about it.<br>
+        • The kid who won — good at loads of stuff, not just science (also does robotics club and plays piano).<br>
+        • Judges couldn't find one single thing wrong with the project.<br>
+        • Big deal for the school — first time ever a student here has won at national level.<br>
+        • Head of science said it wasn't luck — years of the school pushing hard on STEM clubs finally paid off.<br>
+        • People now say the school's STEM programme is genuinely one of the best around, no one else comes close.</p>
+      </div>
+
+      <div class="passage-box">
+        <p>This year's fair attracted a record number of <strong>(0) entries</strong>, a result organisers admit they had not anticipated. Judges described the winning project, a low-cost water filtration system, as remarkably ____<span class="qnum-badge">44</span>____ constructed, with every component fitting together with no visible roughness. The young inventor behind it was also praised for being unusually ____<span class="qnum-badge">45</span>____, being equally accomplished in robotics and piano. Not a single ____<span class="qnum-badge">46</span>____ could be found in the presentation, according to the panel. The result is being seen as a ____<span class="qnum-badge">47</span>____ occasion for the school, marking the first time a student here has succeeded at national level. The head of science was quick to stress that the achievement was no accident, describing it instead as a ____<span class="qnum-badge">48</span>____ to years of sustained investment in STEM clubs. The school's programme, she added, is now widely regarded as ____<span class="qnum-badge">49</span>____, with no comparable programme currently matching it in the region.</p>
+      </div>
+
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">44.</p>
+        <input type="text" class="text-input-ans" oninput="updateTextAnswer(44, this.value)" onblur="logTextAnswer(44)" placeholder="Nhập một từ...">
+      </div>
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">45.</p>
+        <input type="text" class="text-input-ans" oninput="updateTextAnswer(45, this.value)" onblur="logTextAnswer(45)" placeholder="Nhập một từ...">
+      </div>
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">46.</p>
+        <input type="text" class="text-input-ans" oninput="updateTextAnswer(46, this.value)" onblur="logTextAnswer(46)" placeholder="Nhập một từ...">
+      </div>
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">47.</p>
+        <input type="text" class="text-input-ans" oninput="updateTextAnswer(47, this.value)" onblur="logTextAnswer(47)" placeholder="Nhập một từ...">
+      </div>
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">48.</p>
+        <input type="text" class="text-input-ans" oninput="updateTextAnswer(48, this.value)" onblur="logTextAnswer(48)" placeholder="Nhập một từ...">
+      </div>
+      <div class="question-box">
+        <p class="font-bold text-xl mb-3">49. (widely regarded as ______)</p>
+        <input type="text" class="text-input-ans" oninput="updateTextAnswer(49, this.value)" onblur="logTextAnswer(49)" placeholder="Nhập một từ...">
+      </div>
+
+      <div class="text-center mt-16">
+        <button onclick="submitTest()" class="bg-green-600 hover:bg-green-700 text-white font-bold py-8 px-32 rounded-xl text-4xl shadow-2xl">
+          NỘP BÀI
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Màn hình kết quả -->
+<div id="resultScreen" class="hidden min-h-screen flex items-center justify-center p-6 bg-gradient-to-br from-green-50 to-blue-50">
+  <div class="max-w-4xl w-full bg-white rounded-3xl shadow-2xl p-16 text-center">
+    <div class="flex items-center justify-center gap-3 mb-6">
+      <img src="https://gofirst.pro/images/uploads/62/baseimg/logo_16541442053.png" alt="LIME logo" class="h-14 w-auto object-contain">
+      <div class="text-left">
+        <p class="font-bold text-green-700 text-xl leading-tight">Trung Tâm Ngoại Ngữ LIME</p>
+        <p class="text-gray-600 text-base leading-tight">Hotline: 0976222792</p>
+      </div>
+    </div>
+    <h1 class="text-6xl font-bold text-green-700 mb-8">HOÀN THÀNH!</h1>
+    <div class="text-9xl font-bold text-green-600 mb-6" id="finalScore">0%</div>
+    <p class="text-4xl mb-4">Đúng <span id="correctCount">0</span>/<span id="autoTotalDisplay">39</span> câu tự động chấm</p>
+    <p class="text-2xl text-gray-600 mb-4">(+ 15 câu tự luận — xem đáp án mẫu ở phần "Xem lại bài")</p>
+    <p class="text-3xl text-gray-700 mb-12">Thời gian: <span id="finalTime">00:00</span></p>
+
+    <div class="bg-red-50 border-2 border-red-400 rounded-2xl p-8 mb-10">
+      <p class="text-2xl font-bold text-red-800">Câu sai: <span id="wrongList" class="font-mono">Không có</span></p>
+    </div>
+
+    <div class="bg-blue-50 border-2 border-blue-400 rounded-2xl p-8 text-left">
+      <p class="text-2xl font-bold text-blue-800 mb-4">Lịch sử làm bài:</p>
+      <div id="timelineDisplay" class="text-lg space-y-2 font-mono"></div>
+    </div>
+
+    <div class="mt-12 flex flex-wrap gap-6 justify-center">
+      <button onclick="showReview()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-6 px-16 rounded-xl text-3xl shadow-2xl">
+        XEM LẠI BÀI
+      </button>
+      <button onclick="location.reload()" class="bg-green-600 hover:bg-green-700 text-white font-bold py-6 px-16 rounded-xl text-3xl shadow-2xl">
+        LÀM LẠI BÀI
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+const URL = 'https://script.google.com/macros/s/AKfycbyoDCkEfUrvMH-GRpBRlih2xhR1dcHfBPyoKFJuJaycZCsR-HQgmD07xRU9BjRPg67x/exec';
+const TEST_NAME = 'Tenses & Passive - Chuyên';
+const TOTAL_QUESTIONS = 49;
+
+// LOẠI CÂU HỎI: 'mcq' (chọn đáp án), 'text' (điền từ ngắn - tự động chấm), 'manual' (tự luận - không tự động chấm)
+const questionTypes = {};
+[1,2,3,4,5,6,7,8].forEach(q => questionTypes[q] = 'mcq');
+[9,10,11,12,13,14].forEach(q => questionTypes[q] = 'text');
+[15,16,17,18,19].forEach(q => questionTypes[q] = 'manual');
+[20,21,22,23,24].forEach(q => questionTypes[q] = 'text');
+[25,26,27,28,29].forEach(q => questionTypes[q] = 'mcq');
+[30,31,32,33].forEach(q => questionTypes[q] = 'mcq');
+[34,35,36,37,38].forEach(q => questionTypes[q] = 'manual');
+[39,40,41,42,43].forEach(q => questionTypes[q] = 'manual');
+[44,45,46,47,48,49].forEach(q => questionTypes[q] = 'text');
+
+const AUTO_TOTAL = Object.values(questionTypes).filter(t => t !== 'manual').length; // 34
+
+// ĐÁP ÁN ĐÚNG — mcq: 1 ký tự. text: mảng các đáp án được chấp nhận. manual: mảng đáp án mẫu (không chấm điểm).
+const correctAnswers = {
+  1:'B', 2:'A', 3:'D', 4:'C', 5:'A', 6:'C', 7:'B', 8:'D',
+  9:['determination'],
+  10:['flawlessly'],
+  11:['unrivalled','unrivaled','unparalleled'],
+  12:['compelled'],
+  13:['prestigious'],
+  14:['versatility'],
+  15:['insist → insists'],
+  16:['always be → always been'],
+  17:['they → their'],
+  18:['from → of'],
+  19:['easy → easily'],
+  20:['by'],
+  21:['By'],
+  22:['On'],
+  23:['at'],
+  24:['for'],
+  25:'B', 26:'A', 27:'C', 28:'B', 29:'B',
+  30:'A', 31:'B', 32:'D', 33:'E',
+  34:['bore the brunt of'],
+  35:['is gaining traction'],
+  36:['had the slightest inkling'],
+  37:['heralded a completely new approach'],
+  38:['reached a consensus on'],
+  39:['through his own sheer persistence','by dint of his own sheer persistence','because of his own sheer persistence'],
+  40:['can match','matches'],
+  41:['did shareholders realise how serious the losses were'],
+  42:['would she compromise on quality'],
+  43:['had the campaign been expected to gain so much support so quickly','had anybody expected the campaign to gain so much support so quickly'],
+  44:['smoothly'],
+  45:['versatile'],
+  46:['flaw','fault'],
+  47:['landmark'],
+  48:['testament'],
+  49:['unrivalled','unrivaled','unparalleled']
+};
+
+// GIẢI THÍCH ĐÁP ÁN bằng tiếng Việt
+const explanations = {
+  1: "\"Bear the brunt of\" là collocation cố định nghĩa là \"gánh chịu phần nặng nề nhất của khó khăn\", phù hợp với ngữ cảnh bệnh viện thiếu nhân lực mỗi mùa đông. Các phương án còn lại là những cụm bị chế lại gần giống nhưng không phải collocation chuẩn trong tiếng Anh.",
+  2: "\"Reach a consensus on\" (đạt được sự đồng thuận về) là collocation chuẩn khi nói về việc các bên đi đến thống nhất sau tranh luận. \"Found an agreement\", \"settled a compromise\", \"reached an accord about\" đều là những cụm bị biến tấu, không tự nhiên trong tiếng Anh.",
+  3: "\"Buck the trend\" là thành ngữ cố định nghĩa là \"đi ngược lại xu hướng chung\" — rất phù hợp khi các câu lạc bộ khác đang mất thành viên nhưng câu lạc bộ này thì không. Các phương án còn lại không phải cụm cố định.",
+  4: "\"A far cry from\" là thành ngữ nghĩa là \"khác xa so với\", dùng để so sánh sự khác biệt lớn giữa lời kể và sự thật. Đây là cụm cố định duy nhất trong 4 lựa chọn.",
+  5: "\"A stickler for\" là cụm cố định nghĩa là \"người rất khắt khe/cầu toàn về một điều gì đó\", đặc biệt hay dùng với \"punctuality\" (a stickler for punctuality). Các phương án còn lại nghe gần nghĩa nhưng không phải collocation chuẩn.",
+  6: "\"Second to none\" là thành ngữ nghĩa là \"không ai sánh bằng, đứng đầu\", rất phù hợp khi nói về độ tin cậy của một thương hiệu. Các phương án còn lại không phải cụm cố định tương đương.",
+  7: "\"By dint of\" nghĩa là \"nhờ vào (nỗ lực bền bỉ)\", diễn tả việc đạt được thành công nhờ sự kiên trì. \"By virtue of\" nghĩa là \"vì có tư cách/lý do gì đó\" — khác nghĩa, không phù hợp ở đây.",
+  8: "\"Gather momentum\" là collocation cố định nghĩa là \"đà phát triển tăng dần\". Đây là cụm từ duy nhất được dùng phổ biến trong ngữ cảnh này, dù \"gained\"/\"built\" nghe có vẻ hợp lý nhưng không phải collocation chuẩn.",
+  9: "\"With real determination\" (với sự quyết tâm thực sự) — từ \"DETERMINE\" (động từ) được chuyển thành danh từ \"determination\", phù hợp sau tính từ \"real\" và trước dấu phẩy bổ nghĩa \"refusing to rush\".",
+  10: "\"Flawlessly matched\" (được khớp một cách hoàn hảo, không tì vết) — từ \"FLAW\" được chuyển thành trạng từ \"flawlessly\" để bổ nghĩa cho động từ \"matched\".",
+  11: "\"Called it unrivalled in the region\" (gọi đó là vô song trong khu vực) — từ \"RIVAL\" được chuyển thành tính từ phủ định \"unrivalled\", khớp với ý \"nothing comparable existed anywhere nearby\".",
+  12: "\"Had been compelled to postpone\" (đã bị buộc phải hoãn lại) — từ \"COMPEL\" được chuyển thành quá khứ phân từ \"compelled\" trong cấu trúc bị động \"be compelled to do sth\".",
+  13: "\"One of the most prestigious venues\" (một trong những địa điểm uy tín nhất) — từ \"PRESTIGE\" (danh từ) được chuyển thành tính từ \"prestigious\" để đứng trước danh từ \"venues\".",
+  14: "\"Newfound versatility\" (tính đa năng mới có được) — từ \"VERSATILE\" (tính từ) được chuyển thành danh từ \"versatility\", phù hợp vì đứng sau tính từ sở hữu \"the building's\" cần một danh từ.",
+  15: "Chủ ngữ \"the owner\" là danh từ số ít nên động từ phải chia là \"insists\" (thêm -s), không phải \"insist\".",
+  16: "Thì hiện tại hoàn thành cần động từ ở dạng quá khứ phân từ: \"has always been\" chứ không phải \"has always be\".",
+  17: "Cần đại từ sở hữu \"their\" (của họ) đứng trước danh từ \"contract\", không dùng đại từ chủ ngữ \"they\".",
+  18: "Cụm từ cố định là \"the making of the bakery\" (sự hình thành/bước ngoặt của tiệm bánh), dùng giới từ \"of\" chứ không phải \"from\".",
+  19: "Cần trạng từ \"easily\" để bổ nghĩa cho động từ \"match\", không dùng tính từ \"easy\".",
+  20: "\"Driven largely by pursuit of...\" — \"by\" là giới từ đi cùng \"driven\" để chỉ nguyên nhân/động lực.",
+  21: "\"By virtue of\" là cụm cố định nghĩa là \"nhờ có, bởi vì có\" — đứng đầu câu nên viết hoa \"By\".",
+  22: "\"On the grounds of\" là cụm cố định nghĩa là \"với lý do là\", dùng để giải thích căn cứ cho một quyết định hay hành động.",
+  23: "\"At the expense of\" là cụm cố định nghĩa là \"phải trả giá bằng, đánh đổi bằng\", phù hợp với việc công ty phát triển nhưng đánh đổi triết lý sản xuất nhỏ ban đầu.",
+  24: "\"For the sake of\" là cụm cố định nghĩa là \"vì lợi ích của\", phù hợp với việc thay đổi được thực hiện vì lợi ích của người thợ.",
+  25: "Bài đọc nói rõ: \"She had never studied under a master craftsman\" — trái ngược hoàn toàn với nhận định đề bài đưa ra → FALSE.",
+  26: "Bài đọc nêu rõ: \"It took nearly three years before she considered a single violin good enough to sell\" — khớp chính xác với câu hỏi → TRUE.",
+  27: "Bài đọc chỉ đề cập một nhạc công đã giới thiệu cô cho vài đồng nghiệp, không nói rõ tỉ lệ khách hàng hiện tại đến từ nguồn giới thiệu của nhạc công chuyên nghiệp → NOT GIVEN.",
+  28: "Bài đọc khẳng định: \"the turning point was not luck but simply years of refusing to lower her own standards\" — trái ngược với nhận định về \"may mắn\" → FALSE.",
+  29: "Bài đọc kết luận: \"she still works largely alone\" — không có việc nhận học trò để mở rộng xưởng, trái với nhận định đề bài → FALSE.",
+  30: "Đoạn đầu giới thiệu Bà Liên bán nước mắm lâu năm nhưng chưa từng nghĩ đến việc bán ra ngoài khu vực. Đoạn A nói về công thức gia truyền và lượng khách quen trung thành — tiếp nối tự nhiên ý giới thiệu ở đoạn đầu.",
+  31: "Đoạn trước nói tin nhắn từ khách hàng mới \"sat unanswered for nearly a week\". Đoạn B giải thích lý do của sự im lặng đó (lo ngại về việc vận chuyển) — khớp trực tiếp với ý này.",
+  32: "Đoạn trước nói về áp lực từ người thân muốn bà mở rộng sản xuất. Đoạn D nói bà không nghe theo áp lực đó và tiếp tục làm như cũ, dẫn đến danh sách chờ dài hơn — tiếp nối logic của đoạn trước.",
+  33: "Đoạn trước nói khách hàng dần chấp nhận sự khan hiếm như một nét đặc biệt của sản phẩm. Đoạn E là đoạn kết hợp lý, nói về hiện tại sản phẩm đã có mặt ở nhiều cửa hàng nhưng bà vẫn tự tay đóng chai — đoạn C (tự làm video quảng bá) không khớp vì mâu thuẫn với việc bà không muốn mở rộng.",
+  34: "\"Bear the brunt of\" (chịu ảnh hưởng nặng nề nhất) → \"Small shops bore the brunt of the new parking rules.\"",
+  35: "\"Gain traction\" (dần được chấp nhận/ủng hộ) → \"The idea is gaining traction among young employees.\"",
+  36: "\"Have/had an inkling\" (mảy may nghi ngờ/biết trước) → \"Nobody had the slightest inkling that the two firms were about to merge.\"",
+  37: "\"Herald\" (báo hiệu, mở đầu cho) → \"The discovery heralded a completely new approach to teaching science.\"",
+  38: "\"Reach a consensus on\" (đạt được sự đồng thuận về) → \"The two committees finally reached a consensus on the new guidelines.\"",
+  39: "Nhấn mạnh nguyên nhân bằng cấu trúc \"It was + giới từ chỉ nguyên nhân + that...\": \"It was largely through his own sheer persistence that the whole business was built.\"",
+  40: "Câu gốc dùng bị động \"is unmatched by any rival\" — chuyển sang câu chủ động phủ định: \"No rival can match the company's reputation for quality.\"",
+  41: "Cấu trúc đảo ngữ với \"Not until\" đứng đầu câu: \"Not until the scandal broke did shareholders realise how serious the losses were.\"",
+  42: "Cấu trúc đảo ngữ với \"Under no circumstances\" đứng đầu câu (dùng trợ động từ trước chủ ngữ): \"Under no circumstances would she compromise on quality, no matter how much pressure investors put on her.\"",
+  43: "Cấu trúc đảo ngữ với \"Rarely\" đứng đầu câu, dùng thì quá khứ hoàn thành dạng bị động: \"Rarely had the campaign been expected to gain so much support so quickly.\"",
+  44: "\"Remarkably smoothly constructed\" (được lắp ráp một cách trơn tru đáng kể) — khớp với ghi chú \"nothing clunky about it\" (không có gì thô ráp, vụng về).",
+  45: "\"Unusually versatile\" (đa tài một cách khác thường) — khớp với ghi chú \"good at loads of stuff, not just science\" (giỏi nhiều thứ, không chỉ khoa học).",
+  46: "\"Not a single flaw/fault\" (không một khiếm khuyết nào) — khớp với ghi chú \"couldn't find one single thing wrong\".",
+  47: "\"A landmark occasion\" (một dịp mang tính bước ngoặt/lịch sử) — khớp với ghi chú \"first time ever a student here has won at national level\".",
+  48: "\"A testament to\" (minh chứng/bằng chứng cho) — khớp với ghi chú \"years of the school pushing hard on STEM clubs finally paid off\".",
+  49: "\"Widely regarded as unrivalled\" (được coi là không gì sánh bằng) — khớp với ghi chú \"one of the best around, no one else comes close\"."
+};
+
+let student = null, startTime = null, timer = null;
+let answers = {}, timeline = [], tabSwitches = 0;
+let reviewMode = false;
+
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'hidden' && !document.getElementById('testScreen').classList.contains('hidden')) {
+    tabSwitches++;
+    const t = new Date().toLocaleTimeString('vi-VN');
+    timeline.push(`Chuyển tab lúc ${t}`);
+  }
+});
+
+function verifyStudent() {
+  const code = document.getElementById('studentCode').value.trim().toUpperCase();
+  if (!code) return alert('Nhập mã học sinh!');
+
+  fetch(`${URL}?action=verify&code=${code}`)
+    .then(r => r.json())
+    .then(d => {
+      if (!d.exists) return alert('Mã không tồn tại!');
+      student = {code, name: d.studentName || code};
+      document.getElementById('headerName').textContent = student.name;
+      document.getElementById('codeScreen').classList.add('hidden');
+      document.getElementById('testScreen').classList.remove('hidden');
+      startTime = Date.now();
+
+      timer = setInterval(() => {
+        const s = Math.floor((Date.now() - startTime) / 1000);
+        const m = String(Math.floor(s / 60)).padStart(2, '0');
+        const sec = String(s % 60).padStart(2, '0');
+        document.getElementById('timer').textContent = `${m}:${sec}`;
+        const answered = Object.keys(answers).filter(k => answers[k] && String(answers[k]).trim()).length;
+        document.getElementById('progress').style.width = `${(answered / TOTAL_QUESTIONS) * 100}%`;
+      }, 500);
+    })
+    .catch(err => alert('Lỗi kết nối: ' + err.message));
+}
+
+function selectAnswer(questionNum, option) {
+  if (reviewMode) return;
+  const time = new Date().toLocaleTimeString('vi-VN', {hour: '2-digit', minute: '2-digit', second: '2-digit'});
+  const buttons = document.querySelectorAll(`#testScreen .question-box:has(button[onclick*="selectAnswer(${questionNum},"]) .option-btn`);
+  buttons.forEach(btn => btn.classList.remove('selected'));
+  event.target.classList.add('selected');
+  if (!answers[questionNum]) {
+    timeline.push(`Câu ${questionNum}: ${option} (${time})`);
+  } else if (answers[questionNum] !== option) {
+    timeline.push(`→ Đổi câu ${questionNum} thành ${option} (${time})`);
+  }
+  answers[questionNum] = option;
+}
+
+function updateTextAnswer(questionNum, value) {
+  answers[questionNum] = value;
+}
+
+function logTextAnswer(questionNum) {
+  const val = (answers[questionNum] || '').trim();
+  if (!val) return;
+  const time = new Date().toLocaleTimeString('vi-VN', {hour: '2-digit', minute: '2-digit', second: '2-digit'});
+  timeline.push(`Câu ${questionNum}: "${val}" (${time})`);
+}
+
+function normalizeText(str) {
+  return String(str || '')
+    .toLowerCase()
+    .normalize('NFC')
+    .replace(/[.,!?;:"'’‘""()\[\]]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function isTextCorrect(questionNum, userVal) {
+  const accepted = correctAnswers[questionNum];
+  if (!accepted) return false;
+  const norm = normalizeText(userVal);
+  if (!norm) return false;
+  return accepted.some(a => normalizeText(a) === norm);
+}
+
+// Tự chấm điểm dựa trên đáp án nhúng sẵn trong file (chỉ chấm câu mcq và text, bỏ qua câu manual)
+function gradeLocally() {
+  let correctCount = 0;
+  const wrongQuestions = [];
+  for (let i = 1; i <= TOTAL_QUESTIONS; i++) {
+    const type = questionTypes[i];
+    if (type === 'manual') continue;
+    if (type === 'mcq') {
+      if (answers[i] && answers[i] === correctAnswers[i]) {
+        correctCount++;
+      } else {
+        wrongQuestions.push(i);
+      }
+    } else if (type === 'text') {
+      if (answers[i] && isTextCorrect(i, answers[i])) {
+        correctCount++;
+      } else {
+        wrongQuestions.push(i);
+      }
+    }
+  }
+  const score = Math.round((correctCount / AUTO_TOTAL) * 100);
+  return {score, correctCount, wrongQuestions};
+}
+
+function submitTest() {
+  clearInterval(timer);
+  const durationSec = Math.floor((Date.now() - startTime) / 1000);
+  const m = String(Math.floor(durationSec / 60)).padStart(2, '0');
+  const s = String(durationSec % 60).padStart(2, '0');
+  const duration = `${m}:${s}`;
+  const realTime = new Date().toLocaleString('vi-VN');
+
+  // Chấm điểm ngay trên trình duyệt bằng đáp án nhúng sẵn
+  const result = gradeLocally();
+
+  const data = {
+    testName: TEST_NAME,
+    studentCode: student.code,
+    studentName: student.name,
+    answers: answers,
+    score: result.score,
+    correctCount: result.correctCount,
+    wrongQuestions: result.wrongQuestions.join(', '),
+    timeUsed: duration,
+    realSubmitTime: realTime,
+    timeline: timeline.join(' | '),
+    tabSwitchLog: tabSwitches > 0 ? `Chuyển tab ${tabSwitches} lần` : 'Không chuyển tab',
+    totalQuestions: TOTAL_QUESTIONS
+  };
+
+  // Hiển thị kết quả ngay lập tức cho học sinh, không phụ thuộc phản hồi của Apps Script
+  showResult(result, duration);
+
+  // Vẫn gửi dữ liệu về Google Sheet để lưu trữ / giáo viên theo dõi
+  fetch(`${URL}?action=submit&data=${encodeURIComponent(JSON.stringify(data))}`)
+    .then(r => r.json())
+    .catch(err => {
+      console.warn('Không gửi được lên Google Sheet, nhưng điểm đã hiển thị cho học sinh:', err.message);
+    });
+}
+
+function showResult(result, duration) {
+  document.getElementById('testScreen').classList.add('hidden');
+  document.getElementById('resultScreen').classList.remove('hidden');
+  document.getElementById('finalScore').textContent = result.score + '%';
+  document.getElementById('correctCount').textContent = result.correctCount;
+  document.getElementById('autoTotalDisplay').textContent = AUTO_TOTAL;
+  document.getElementById('finalTime').textContent = duration;
+  document.getElementById('wrongList').textContent = result.wrongQuestions.length ? result.wrongQuestions.join(', ') : 'Không có';
+
+  const tl = document.getElementById('timelineDisplay');
+  timeline.forEach(l => {
+    const p = document.createElement('p');
+    p.textContent = l;
+    tl.appendChild(p);
+  });
+  if (tabSwitches > 0) {
+    const warn = document.createElement('p');
+    warn.className = 'text-red-600 font-bold text-xl';
+    warn.textContent = `Phát hiện chuyển tab ${tabSwitches} lần!`;
+    tl.appendChild(warn);
+  }
+}
+
+// ===== XEM LẠI BÀI =====
+function showReview() {
+  reviewMode = true;
+  document.getElementById('resultScreen').classList.add('hidden');
+  document.getElementById('testScreen').classList.remove('hidden');
+
+  const submitBtn = document.querySelector('button[onclick="submitTest()"]');
+  if (submitBtn) submitBtn.parentElement.style.display = 'none';
+
+  const container = document.querySelector('#testScreen .max-w-6xl');
+
+  if (!document.getElementById('reviewToolbar')) {
+    const toolbar = document.createElement('div');
+    toolbar.id = 'reviewToolbar';
+    toolbar.className = 'review-legend';
+    toolbar.innerHTML = `
+      <button onclick="backToResult()" class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-xl text-xl shadow-lg">⬅ Quay lại kết quả</button>
+      <span><span class="legend-dot" style="background:#4CAF50;"></span>Đáp án đúng</span>
+      <span><span class="legend-dot" style="background:#f44336;"></span>Đáp án bạn chọn (sai)</span>
+      <span><span class="legend-dot" style="background:#FFE0B2;"></span>Câu tự luận — tự đối chiếu</span>
+    `;
+    container.insertBefore(toolbar, container.firstChild);
+  }
+
+  renderReview();
+  window.scrollTo(0, 0);
+}
+
+function backToResult() {
+  document.getElementById('testScreen').classList.add('hidden');
+  document.getElementById('resultScreen').classList.remove('hidden');
+}
+
+function renderReview() {
+  for (let i = 1; i <= TOTAL_QUESTIONS; i++) {
+    const type = questionTypes[i];
+    let box;
+    if (type === 'mcq') {
+      box = document.querySelector(`#testScreen .question-box:has(button[onclick*="selectAnswer(${i},"])`);
+    } else {
+      box = document.querySelector(`#testScreen .question-box:has(input[oninput*="updateTextAnswer(${i},"])`);
+    }
+    if (!box) continue;
+
+    if (type === 'mcq') {
+      const buttons = box.querySelectorAll('.option-btn');
+      buttons.forEach(btn => {
+        const m = btn.getAttribute('onclick').match(/selectAnswer\(\d+,\s*'([A-E])'\)/);
+        const opt = m ? m[1] : null;
+        btn.classList.remove('selected', 'correct-ans', 'wrong-ans');
+        btn.style.pointerEvents = 'none';
+        if (opt === correctAnswers[i]) {
+          btn.classList.add('correct-ans');
+        } else if (opt === answers[i]) {
+          btn.classList.add('wrong-ans');
+        }
+      });
+    } else {
+      const input = box.querySelector('.text-input-ans');
+      if (input) {
+        input.disabled = true;
+        if (type === 'text') {
+          const ok = answers[i] && isTextCorrect(i, answers[i]);
+          input.classList.add(ok ? 'correct-text' : 'wrong-text');
+        }
+      }
+    }
+
+    let expDiv = box.querySelector('.explanation-box');
+    if (!expDiv) {
+      expDiv = document.createElement('div');
+      expDiv.className = 'explanation-box';
+      box.appendChild(expDiv);
+    }
+
+    let statusHtml, correctDisplay;
+    if (type === 'manual') {
+      const answered = answers[i] && String(answers[i]).trim();
+      statusHtml = answered
+        ? `<span class="exp-status text-orange-700">✍️ Bạn đã trả lời: "${answers[i]}"</span>`
+        : '<span class="exp-status text-gray-600">⚪ Bạn chưa trả lời câu này</span>';
+      correctDisplay = (correctAnswers[i] || []).join(' / hoặc / ');
+      expDiv.innerHTML = `<p class="font-bold mb-2">${statusHtml} — Đáp án mẫu: <span class="text-blue-700 font-bold">${correctDisplay}</span></p><p>${explanations[i] || 'Đang cập nhật giải thích.'}</p>`;
+    } else if (type === 'text') {
+      const isCorrect = answers[i] && isTextCorrect(i, answers[i]);
+      statusHtml = answers[i]
+        ? (isCorrect
+            ? '<span class="exp-status text-green-700">✅ Bạn đã trả lời ĐÚNG</span>'
+            : `<span class="exp-status text-red-700">❌ Bạn đã trả lời SAI (đã nhập "${answers[i]}")</span>`)
+        : '<span class="exp-status text-gray-600">⚪ Bạn chưa trả lời câu này</span>';
+      correctDisplay = (correctAnswers[i] || []).join(' / ');
+      expDiv.innerHTML = `<p class="font-bold mb-2">${statusHtml} — Đáp án đúng: <span class="text-green-700 font-bold">${correctDisplay}</span></p><p>${explanations[i] || 'Đang cập nhật giải thích.'}</p>`;
+    } else {
+      const isCorrect = answers[i] === correctAnswers[i];
+      statusHtml = answers[i]
+        ? (isCorrect
+            ? '<span class="exp-status text-green-700">✅ Bạn đã trả lời ĐÚNG</span>'
+            : `<span class="exp-status text-red-700">❌ Bạn đã trả lời SAI (đã chọn ${answers[i]})</span>`)
+        : '<span class="exp-status text-gray-600">⚪ Bạn chưa trả lời câu này</span>';
+      expDiv.innerHTML = `<p class="font-bold mb-2">${statusHtml} — Đáp án đúng: <span class="text-green-700 font-bold">${correctAnswers[i]}</span></p><p>${explanations[i] || 'Đang cập nhật giải thích.'}</p>`;
+    }
+  }
+}
+</script>
+</body>
+</html>
